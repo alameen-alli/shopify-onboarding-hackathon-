@@ -17,7 +17,7 @@ const TRIAL_CALLOUT_CLOSE_BTN = document.getElementById(
 );
 const TRIAL_CALLOUT_ARIA_NOTIFICATION =
   document.getElementById("trial-callout");
-const TOGGLE_SETUP_BTN = document.getElementById("toggle-setup-btn");
+const TOGGLE_SETUP_BTN = document.getElementById("setupguide-toggle-button");
 const SETUP = document.getElementById("setup");
 const TOGGLE_SETUP_ARIA_NOTIFICATION = document.getElementById(
   "toggle-setup-notify"
