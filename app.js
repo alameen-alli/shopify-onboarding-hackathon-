@@ -1,6 +1,3 @@
-  const ALERTS_BTN = document.getElementById("notifications");
-  const ALERTS_CONTAINER = document.getElementById("notification-btn");
-  const ALERTS_ARIA_NOTIFICATION = document.getElementById("alerts-notify");
 
   const MENU_BTN = document.getElementById("menu-btn");
   const MENU = document.getElementById("menu");
@@ -10,9 +7,12 @@
   const ACTIVE_CLASS = "active";
   const ALERT_INDEX = 0;
   const MENU_INDEX = 1;
-  const POPUPS = [ALERTS_CONTAINER, MENU];
-  const POPUP_BTNS = [ALERTS_BTN, MENU_BTN];
-  const POPUPS_ARIA_NOTIFICATION = [ALERTS_ARIA_NOTIFICATION, MENU_ARIA_NOTIFICATION];
+  const NOTIFICATIONS_BTN = document.getElementById("notification-btn");
+  const NOTIFICATIONS_CONTAINER = document.getElementById("notifications");
+  const ARIA_NOTIFICATIONS = document.getElementById("alerts-notify");
+  const POPUPS = [NOTIFICATIONS_CONTAINER, MENU];
+  const POPUP_BTNS = [NOTIFICATIONS_BTN, MENU_BTN];
+  const POPUPS_ARIA_NOTIFICATION = [ARIA_NOTIFICATIONS, MENU_ARIA_NOTIFICATION];
 
   const TRIAL_CALLOUT = document.getElementById("callout");
   const TRIAL_CALLOUT_CLOSE_BTN = document.getElementById("trial-callout-close-button");
@@ -183,7 +183,7 @@
     return ((NUM % N) + N) % N;
   }
 
-  ALERTS_BTN.addEventListener("click", (EVENT) => {
+  NOTIFICATIONS_BTN.addEventListener("click", (EVENT) => {
     TOGGLE_POPUP(EVENT, ALERT_INDEX);
   });
 
@@ -199,7 +199,7 @@
   POPUPS.forEach((POPUP) => {
     POPUP.addEventListener("keyup", HANDLE_ESCAPE_KEY_PRESS);
   });
-  ALERTS_BTN.addEventListener("keyup", HANDLE_ESCAPE_KEY_PRESS);
+  NOTIFICATIONS_BTN.addEventListener("keyup", HANDLE_ESCAPE_KEY_PRESS);
 
   MENU_ITEMS.forEach((MENU_ITEM, INDEX) =>
     MENU_ITEM.addEventListener("keyup", (EVENT) => HANDLE_MENU_ITEM_KEY_PRESS(EVENT, INDEX))
