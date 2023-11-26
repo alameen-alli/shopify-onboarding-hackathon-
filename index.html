@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
   <body>
-    <header class="notification-pane">
+    <div class="notification-pane">
       <div>
         <div class="shopify-logo-container">
           <a href="https://shopify.com" target="_blank" class="shopifyLink">
@@ -143,7 +143,7 @@
               role="dialog"
               aria-labelledby="alerts-title"
             >
-              <header>
+              <div>
                 <h2 id="alerts-title">Alerts</h2>
                 <div class="block-content">
                   <button>
@@ -196,7 +196,7 @@
                     </svg>
                   </button>
                 </div>
-              </header>
+              </div>
 
               <p>Alerts about your store and account will show here</p>
             </div>
@@ -259,7 +259,7 @@
                 <span class="screen-reader-text">User Menu</span>
               </h2>
             </li>
-            <li class="divider">
+            <li class="horizontalLine">
               <a href="https://admin.shopify.com" role="menuitem">
                 <div class="block-content">
                   <svg
@@ -301,7 +301,7 @@
                 >Hire a Shopify Partner</a
               >
             </li>
-            <li class="divider">
+            <li class="horizontalLine">
               <a href="https://admin.shopify.com" role="menuitem"
                 >Keyboard shortcuts</a
               >
@@ -324,7 +324,7 @@
           </ul>
         </div>
       </div>
-    </header>
+    </div>
 
     <span aria-live="polite" id="trial-callout"></span>
     <div id="select-a-plan-callout" class="trial-callout">
@@ -358,20 +358,20 @@
     </div>
 
     <div class="setupguide">
-      <header>
+      <div>
         <div>
           <h2>Setup guide</h2>
           <p>Use this personalized guide to get your store up and running.</p>
-          <div id="onboarding-progress" class="onboarding-progress">
-            <span><span id="progress-count">0</span> / 5 completed</span>
-            <div class="onboarding-progress-meter" aria-hidden="true">
-              <span class="bar" id="progess-bar"></span>
+          <div class="setupguide-progress">
+            <span><span id="setupguide-progress-count">0</span> / 5 completed</span>
+            <div class="setupguide-progress-meter" aria-hidden="true">
+              <span class="bar" id="setupguide-progess-bar"></span>
             </div>
           </div>
         </div>
         <button
-          id="toggle-setup-btn"
-          class="btn-plain"
+          id="setupguide-toggle-button"
+          class="transparent"
           aria-haspopup="true"
           aria-controls="setup"
           aria-expanded="true"
@@ -396,7 +396,7 @@
             <span class="screen-reader-text">Expand or collapse setup</span>
           </span>
         </button>
-      </header>
+      </div>
       <span id="toggle-setup-notify" aria-live="polite"></span>
 
       <ul class="setup" id="setup">
@@ -632,8 +632,8 @@
               >
             </p>
             <div class="btns-wrapper">
-              <button class="btn-dark">Add product</button>
-              <button class="btn-plain">Import product</button>
+              <button class="darkButton">Add product</button>
+              <button class="transparent">Import product</button>
             </div>
             <img
               src="https://crushingit.tech/hackathon-assets/product.png"
@@ -753,7 +753,7 @@
                 >Learn more</a
               >
             </p>
-            <button class="btn-dark">Add domain</button>
+            <button class="darkButton">Add domain</button>
             <img
               src="https://crushingit.tech/hackathon-assets/website.png"
               alt=""
@@ -873,7 +873,7 @@
                 >Learn more</a
               >
             </p>
-            <button class="btn-dark">Name store</button>
+            <button class="darkButton">Name store</button>
             <img
               src="https://crushingit.tech/hackathon-assets/name-store.png"
               alt=""
@@ -994,7 +994,7 @@
                 >Learn more</a
               >
             </p>
-            <button class="btn-dark">Set up payment</button>
+            <button class="darkButton">Set up payment</button>
             <img
               src="https://crushingit.tech/hackathon-assets/payment.png"
               alt=""

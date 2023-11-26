@@ -1,16 +1,16 @@
-const MENU_BTN = document.getElementById("profile-menu-button");
+const PROFILE_MENU_BTN = document.getElementById("profile-menu-button");
 const MENU = document.getElementById("menu");
 const MENU_ITEMS = document.querySelectorAll('[role="menuitem"]');
-const MENU_ARIA_NOTIFICATION = document.getElementById("profile-menu-notify");
-const HIDDEN_CLASS = "hidden";
-const MENU_INDEX = 1;
+const PROFILE_MENU_ARIA_NOTIFICATION = document.getElementById("profile-menu-notify");
+const HIDDENSTYLE = "hidden";
+const MENUID = 1;
 const NOTIFICATIONS_BTN = document.getElementById("notification-btn");
 const NOTIFICATIONS_CONTAINER = document.getElementById("notifications");
 const ARIA_NOTIFICATIONS = document.getElementById("alerts-notify");
 const POPUPS = [NOTIFICATIONS_CONTAINER, MENU];
-const POPUP_BTNS = [NOTIFICATIONS_BTN, MENU_BTN];
-const ALERT_INDEX = 0;
-const POPUPS_ARIA_NOTIFICATION = [ARIA_NOTIFICATIONS, MENU_ARIA_NOTIFICATION];
+const POPUP_BTNS = [NOTIFICATIONS_BTN, PROFILE_MENU_BTN];
+const NOTIFICATIONID = 0;
+const POPUPS_ARIA_NOTIFICATION = [ARIA_NOTIFICATIONS, PROFILE_MENU_ARIA_NOTIFICATION];
 const TRIAL_CALLOUT = document.getElementById("select-a-plan-callout");
 const TRIAL_CALLOUT_CLOSE_BTN = document.getElementById(
   "trial-callout-close-button"
@@ -22,8 +22,8 @@ const SETUP = document.getElementById("setup");
 const TOGGLE_SETUP_ARIA_NOTIFICATION = document.getElementById(
   "toggle-setup-notify"
 );
-const PROGRESSBAR = document.getElementById("progess-bar");
-const PROGRESS_COUNT = document.getElementById("progress-count");
+const PROGRESSBAR = document.getElementById("setupguide-progess-bar");
+const PROGRESS_COUNT = document.getElementById("setupguide-progress-count");
 const TOGGLE_SETUP_STEP_VISIBILITY_BTNS =
   document.querySelectorAll(".setup-step-toggle");
 const SETUP_STEPS = [...document.querySelectorAll(".setup-step")];
@@ -36,14 +36,14 @@ const TOGGLE_COMPLETE_ARIA_NOTIFICATIONS = document.querySelectorAll(
   ".check-step-btn-notify"
 );
 
-function HIDE_POPUPS() {
+const HIDE_POPUPS = () => {
   POPUPS.forEach((popup, index) => {
-    const IS_POPUP_OPEN = !popup.classList.contains(HIDDEN_CLASS);
+    const IS_POPUP_OPEN = !popup.classList.contains(HIDDENSTYLE);
     if (!IS_POPUP_OPEN) {
       return;
     }
 
-    popup.classList.add(HIDDEN_CLASS);
+    popup.classList.add(HIDDENSTYLE);
     POPUP_BTNS[index].setAttribute("aria-expanded", false);
     const POPUP_ARIA_NOTIFICATION = POPUPS_ARIA_NOTIFICATION[index];
     POPUP_ARIA_NOTIFICATION.setAttribute(
@@ -51,16 +51,18 @@ function HIDE_POPUPS() {
       POPUP_ARIA_NOTIFICATION.dataset.closeLabel
     );
   });
-}
+};
 
-function TOGGLE_POPUP(event, POPUP_INDEX) {
+
+const TOGGLE_POPUP = (event, POPUP_INDEX) => {
   const POPUP = POPUPS[POPUP_INDEX];
   const POPUP_BTN = POPUP_BTNS[POPUP_INDEX];
-  const IS_POPUP_OPEN = !POPUP.classList.contains(HIDDEN_CLASS);
+  const IS_POPUP_OPEN = !POPUP.classList.contains(HIDDENSTYLE);
+
   HIDE_POPUPS();
 
   if (!IS_POPUP_OPEN) {
-    POPUP.classList.remove(HIDDEN_CLASS);
+    POPUP.classList.remove(HIDDENSTYLE);
     POPUP_BTN.setAttribute("aria-expanded", true);
     const POPUP_ARIA_NOTIFICATION = POPUPS_ARIA_NOTIFICATION[POPUP_INDEX];
     POPUP_ARIA_NOTIFICATION.setAttribute(
@@ -69,28 +71,24 @@ function TOGGLE_POPUP(event, POPUP_INDEX) {
     );
     event.stopPropagation();
   }
-}
+};
 
-function HIDE_POPUPS_ON_CLICK_OUTSIDE(event) {
-  const IS_ANY_POPUP_CLICKED = POPUPS.some((popup) => {
-    return popup.contains(event.target);
-  });
-  if (IS_ANY_POPUP_CLICKED) {
-    return;
+
+const HIDE_POPUPS_ON_CLICK_OUTSIDE = (event) => {
+  const IS_ANY_POPUP_CLICKED = POPUPS.some((popup) => popup.contains(event.target));
+  if (!IS_ANY_POPUP_CLICKED) {
+    HIDE_POPUPS();
   }
+};
 
-  HIDE_POPUPS();
-}
+const FOCUS_FIRST_MENU_ITEM = () => MENU_ITEMS.item(0).focus();
 
-function FOCUS_FIRST_MENU_ITEM() {
-  MENU_ITEMS.item(0).focus();
-}
-
-function HANDLE_ESCAPE_KEY_PRESS(event) {
+const HANDLE_ESCAPE_KEY_PRESS = (event) => {
   if (event.key === "Escape") {
     HIDE_POPUPS();
   }
-}
+};
+
 
 const HANDLE_MENU_ITEM_KEY_PRESS = (event, MENU_ITEM_INDEX) => {
   const NEXT_MENU_ITEM_INDEX =
@@ -110,16 +108,16 @@ const HANDLE_MENU_ITEM_KEY_PRESS = (event, MENU_ITEM_INDEX) => {
 };
 
 const TOGGLE_SETUP = () => {
-  SETUP.classList.toggle(HIDDEN_CLASS);
+  SETUP.classList.toggle(HIDDENSTYLE);
 
-  const IS_OPEN = !SETUP.classList.contains(HIDDEN_CLASS);
+  const IS_OPEN = !SETUP.classList.contains(HIDDENSTYLE);
   TOGGLE_SETUP_ARIA_NOTIFICATION.setAttribute(
     "aria-label",
     IS_OPEN ? "Setup opened" : "Setup closed"
   );
 
-  TOGGLE_SETUP_BTN.setAttribute("aria-expanded", IS_OPEN);
-  TOGGLE_SETUP_BTN.dataset.isOpen = IS_OPEN ? "" : true;
+  SETUPGUIDE_TOGGLE_CHECK.setAttribute("aria-expanded", IS_OPEN);
+  SETUPGUIDE_TOGGLE_CHECK.dataset.isOpen = IS_OPEN ? "" : true;
 };
 
 const SHOW_SETUP_STEP = (SETUP_STEP_INDEX) => {
@@ -208,13 +206,13 @@ const UPDATE_PROGRESS_BAR = () => {
 const MOD_NUMBER = (NUM, N) => ((NUM % N) + N) % N;
 
 NOTIFICATIONS_BTN.addEventListener("click", (EVENT) => {
-  TOGGLE_POPUP(EVENT, ALERT_INDEX);
+  TOGGLE_POPUP(EVENT, NOTIFICATIONID);
 });
 
-MENU_BTN.addEventListener("click", (EVENT) => {
-  TOGGLE_POPUP(EVENT, MENU_INDEX);
+PROFILE_MENU_BTN.addEventListener("click", (EVENT) => {
+  TOGGLE_POPUP(EVENT, MENUID);
 
-  const IS_MENU_OPEN = !MENU.classList.contains(HIDDEN_CLASS);
+  const IS_MENU_OPEN = !MENU.classList.contains(HIDDENSTYLE);
   if (IS_MENU_OPEN) {
     FOCUS_FIRST_MENU_ITEM();
   }
@@ -234,7 +232,7 @@ MENU_ITEMS.forEach((MENU_ITEM, INDEX) =>
 document.addEventListener("click", HIDE_POPUPS_ON_CLICK_OUTSIDE);
 
 TRIAL_CALLOUT_CLOSE_BTN.addEventListener("click", () => {
-  TRIAL_CALLOUT.classList.add(HIDDEN_CLASS);
+  TRIAL_CALLOUT.classList.add(HIDDENSTYLE);
   TRIAL_CALLOUT_ARIA_NOTIFICATION.setAttribute("aria-label", "Callout removed");
 });
 
