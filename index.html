@@ -14,10 +14,10 @@
     <link rel="stylesheet" href="./app.css" />
   </head>
   <body>
-    <section class="top-bar">
+    <header class="notification-pane">
       <div>
-        <h1>
-          <a href="https://shopify.com">
+        <div>
+          <a class="shopifyLink" href="https://shopify.com">
             <span class="sr-only">Shopify</span>
             <svg
               class="large-logo"
@@ -77,10 +77,9 @@
               />
             </svg>
           </a>
-        </h1>
+        </div>
 
-        <section class="search">
-          <label for="search" class="sr-only">Search</label>
+        <div class="search">
           <svg
             aria-hidden="true"
             class="icon"
@@ -96,11 +95,17 @@
               d="M8.82264 10.3833C7.89957 11.0841 6.74835 11.5 5.5 11.5C2.46243 11.5 0 9.03757 0 6C0 2.96243 2.46243 0.5 5.5 0.5C8.53757 0.5 11 2.96243 11 6C11 7.24835 10.5841 8.39957 9.8833 9.32264L12.7803 12.2197C13.0732 12.5126 13.0732 12.9874 12.7803 13.2803C12.4874 13.5732 12.0126 13.5732 11.7197 13.2803L8.82264 10.3833ZM9.5 6C9.5 8.20914 7.70914 10 5.5 10C3.29086 10 1.5 8.20914 1.5 6C1.5 3.79086 3.29086 2 5.5 2C7.70914 2 9.5 3.79086 9.5 6Z"
             />
           </svg>
-          <input id="search-input" type="text" placeholder="Search" class="search-input" />
-        </section>
+          <input
+            autocomplete="off"
+            id="search-input"
+            type="text"
+            placeholder="Search"
+            class="inputField"
+          />
+        </div>
 
-        <div class="btns-wrapper">
-          <section>
+        <div class="profileBox">
+          <div>
             <button
               class="alerts-btn"
               id="notification-btn"
@@ -132,7 +137,12 @@
               data-open-label="Alerts opened"
               data-close-label="Alerts closed"
             ></span>
-            <div class="alerts hidden" id="alerts" role="dialog" aria-labelledby="alerts-title">
+            <div
+              class="alerts hidden"
+              id="alerts"
+              role="dialog"
+              aria-labelledby="alerts-title"
+            >
               <header>
                 <h2 id="alerts-title">Alerts</h2>
                 <div class="flex-wrapper">
@@ -190,7 +200,7 @@
 
               <p>Alerts about your store and account will show here</p>
             </div>
-          </section>
+          </div>
 
           <div class="menu-wrapper">
             <button
@@ -210,9 +220,18 @@
               data-open-label="Menu opened"
               data-close-label="Menu closed"
             ></span>
-            <ul id="menu" class="menu hidden" role="menu" aria-labelledby="menu-title">
+            <ul
+              id="menu"
+              class="menu hidden"
+              role="menu"
+              aria-labelledby="menu-title"
+            >
               <li>
-                <h2 href="https://admin.shopify.com" id="menu-title" class="menu-title">
+                <h2
+                  href="https://admin.shopify.com"
+                  id="menu-title"
+                  class="menu-title"
+                >
                   <div class="flex-wrapper">
                     <span class="user-img" aria-label="User image">DC</span
                     ><span>Davii Collections</span>
@@ -266,19 +285,29 @@
               </li>
 
               <li>
-                <a href="https://admin.shopify.com" role="menuitem">Help Center</a>
+                <a href="https://admin.shopify.com" role="menuitem"
+                  >Help Center</a
+                >
               </li>
               <li>
-                <a href="https://admin.shopify.com" role="menuitem">Changelog</a>
+                <a href="https://admin.shopify.com" role="menuitem"
+                  >Changelog</a
+                >
               </li>
               <li>
-                <a href="https://admin.shopify.com" role="menuitem">Community forums</a>
+                <a href="https://admin.shopify.com" role="menuitem"
+                  >Community forums</a
+                >
               </li>
               <li>
-                <a href="https://admin.shopify.com" role="menuitem">Hire a Shopify Partner</a>
+                <a href="https://admin.shopify.com" role="menuitem"
+                  >Hire a Shopify Partner</a
+                >
               </li>
               <li class="divider">
-                <a href="https://admin.shopify.com" role="menuitem">Keyboard shortcuts</a>
+                <a href="https://admin.shopify.com" role="menuitem"
+                  >Keyboard shortcuts</a
+                >
               </li>
 
               <li>
@@ -288,7 +317,9 @@
                 </div>
               </li>
               <li>
-                <a href="https://admin.shopify.com" role="menuitem">Manage account</a>
+                <a href="https://admin.shopify.com" role="menuitem"
+                  >Manage account</a
+                >
               </li>
               <li>
                 <a href="https://admin.shopify.com" role="menuitem">Log out</a>
@@ -297,13 +328,15 @@
           </div>
         </div>
       </div>
-    </section>
+    </header>
 
     <span aria-live="polite" id="callout-notify"></span>
-    <section id="callout" class="callout">
+    <div id="callout" class="callout">
       <div class="flex-wrapper">
         <p>Extend your trial for $1/month for 3 months on select plans.</p>
-        <a href="https://shopify.com/pricing" class="btn-light">Select a plan</a>
+        <a href="https://shopify.com/pricing" class="btn-light"
+          >Select a plan</a
+        >
       </div>
       <button class="close-btn" id="callout-close-btn">
         <span class="sr-only">Close callout</span>
@@ -322,7 +355,7 @@
           />
         </svg>
       </button>
-    </section>
+    </div>
 
     <main class="onboarding">
       <header>
@@ -472,14 +505,18 @@
           <span aria-live="polite" class="setup-step-notify"></span>
           <div class="content" id="setup-step-1">
             <p>
-              Choose a theme and add your logo, colors, and images to reflect your brand.
+              Choose a theme and add your logo, colors, and images to reflect
+              your brand.
               <a
                 href="https://help.shopify.com/en/manual/intro-to-shopify/initial-setup/setup-business-settings#set-or-change-your-online-store-name-and-legal-business-name"
                 >Learn more</a
               >
             </p>
             <button class="btn-dark">Customize theme</button>
-            <img src="https://crushingit.tech/hackathon-assets/customise-store.png" alt="" />
+            <img
+              src="https://crushingit.tech/hackathon-assets/customise-store.png"
+              alt=""
+            />
           </div>
         </li>
         <li class="setup-step">
@@ -587,7 +624,8 @@
           <span aria-live="polite" class="setup-step-notify"></span>
           <div class="content" id="setup-step-2">
             <p>
-              Write a description, add photos, and set pricing for the products you plan to sell.
+              Write a description, add photos, and set pricing for the products
+              you plan to sell.
               <a
                 href="https://help.shopify.com/en/manual/intro-to-shopify/initial-setup/setup-business-settings#set-or-change-your-online-store-name-and-legal-business-name"
                 >Learn more</a
@@ -597,7 +635,10 @@
               <button class="btn-dark">Add product</button>
               <button class="btn-plain">Import product</button>
             </div>
-            <img src="https://crushingit.tech/hackathon-assets/product.png" alt="" />
+            <img
+              src="https://crushingit.tech/hackathon-assets/product.png"
+              alt=""
+            />
           </div>
         </li>
         <li class="setup-step">
@@ -705,15 +746,18 @@
           <span aria-live="polite" class="setup-step-notify"></span>
           <div class="content" id="setup-step-3">
             <p>
-              Your current domain is 222219.myshopify.com but you can add a custom domain to help
-              customers find your online store.
+              Your current domain is 222219.myshopify.com but you can add a
+              custom domain to help customers find your online store.
               <a
                 href="https://help.shopify.com/en/manual/intro-to-shopify/initial-setup/setup-business-settings#set-or-change-your-online-store-name-and-legal-business-name"
                 >Learn more</a
               >
             </p>
             <button class="btn-dark">Add domain</button>
-            <img src="https://crushingit.tech/hackathon-assets/website.png" alt="" />
+            <img
+              src="https://crushingit.tech/hackathon-assets/website.png"
+              alt=""
+            />
           </div>
         </li>
 
@@ -822,15 +866,18 @@
           <span aria-live="polite" class="setup-step-notify"></span>
           <div class="content" id="setup-step-4">
             <p>
-              Your temporary store name is currently Davii collections. The store name appears in
-              your admin and your online store.
+              Your temporary store name is currently Davii collections. The
+              store name appears in your admin and your online store.
               <a
                 href="https://help.shopify.com/en/manual/intro-to-shopify/initial-setup/setup-business-settings#set-or-change-your-online-store-name-and-legal-business-name"
                 >Learn more</a
               >
             </p>
             <button class="btn-dark">Name store</button>
-            <img src="https://crushingit.tech/hackathon-assets/name-store.png" alt="" />
+            <img
+              src="https://crushingit.tech/hackathon-assets/name-store.png"
+              alt=""
+            />
           </div>
         </li>
 
@@ -939,15 +986,19 @@
           <span aria-live="polite" class="setup-step-notify"></span>
           <div class="content" id="setup-step-5">
             <p>
-              Choose a payment provider to start accepting payments. You’ll need to create an
-              account with the payment provider and set it up with your Shopify store.
+              Choose a payment provider to start accepting payments. You’ll need
+              to create an account with the payment provider and set it up with
+              your Shopify store.
               <a
                 href="https://help.shopify.com/en/manual/intro-to-shopify/initial-setup/setup-business-settings#set-or-change-your-online-store-name-and-legal-business-name"
                 >Learn more</a
               >
             </p>
             <button class="btn-dark">Set up payment</button>
-            <img src="https://crushingit.tech/hackathon-assets/payment.png" alt="" />
+            <img
+              src="https://crushingit.tech/hackathon-assets/payment.png"
+              alt=""
+            />
           </div>
         </li>
       </ul>
