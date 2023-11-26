@@ -1,257 +1,226 @@
-function app() {
-    // CONSTANTS
-    const HIDDEN_CLASS = "hidden";
-    const ACTIVE_CLASS = "active";
-    const ALERT_INDEX = 0;
-    const MENU_INDEX = 1;
-  
-    // DOM elements related with the alerts and menu
-    const alertsBtn = document.getElementById("alerts-btn");
-    const alertsContainer = document.getElementById("alerts");
-    const alertsARIANotification = document.getElementById("alerts-notify");
-  
-    const menuBtn = document.getElementById("menu-btn");
-    const menu = document.getElementById("menu");
-    const menuItems = document.querySelectorAll('[role="menuitem"]');
-    const menuARIANotification = document.getElementById("menu-notify");
-  
-    const popups = [alertsContainer, menu];
-    const popupBtns = [alertsBtn, menuBtn];
-    const popupsARIANotification = [alertsARIANotification, menuARIANotification];
-  
-    // DOM elements for the callout section
-    const callout = document.getElementById("callout");
-    const calloutCloseBtn = document.getElementById("callout-close-btn");
-    const calloutARIANotification = document.getElementById("callout-notify");
-  
-    // DOM elements for the setup steps section
-    const toggleSetupBtn = document.getElementById("toggle-setup-btn");
-    const setup = document.getElementById("setup");
-    const toggleSetupARIANotification = document.getElementById("toggle-setup-notify");
-  
-    const toggleSetupStepVisibiltyBtns = document.querySelectorAll(".setup-step-toggle");
-    const setupSteps = [...document.querySelectorAll(".setup-step")];
-    const setupStepsARIANotifications = document.querySelectorAll(".setup-step-notify");
-  
-    const toggleSetupStepCompleteBtns = document.querySelectorAll(".check-step-btn");
-    const toggleCompleteARIANotifications = document.querySelectorAll(".check-step-btn-notify");
-    const progressbar = document.getElementById("progess-bar");
-    const progressCount = document.getElementById("progress-count");
-  
-    // Remove all popups from view
-    function hidePopups() {
-      popups.forEach((popup, index) => {
-        const isPopupOpen = !popup.classList.contains(HIDDEN_CLASS);
-        if (!isPopupOpen) {
-          return;
-        }
-  
-        popup.classList.add(HIDDEN_CLASS);
-        popupBtns[index].setAttribute("aria-expanded", false);
-        const popupARIANotification = popupsARIANotification[index];
-        popupARIANotification.setAttribute("aria-label", popupARIANotification.dataset.closeLabel);
-      });
-    }
-  
-    // Toggle popup visibility
-    function togglePopup(event, popupIndex) {
-      const popup = popups[popupIndex];
-      const popupBtn = popupBtns[popupIndex];
-      const isPopupOpen = !popup.classList.contains(HIDDEN_CLASS);
-      hidePopups();
-  
-      if (!isPopupOpen) {
-        popup.classList.remove(HIDDEN_CLASS);
-        popupBtn.setAttribute("aria-expanded", true);
-        const popupARIANotification = popupsARIANotification[popupIndex];
-        popupARIANotification.setAttribute("aria-label", popupARIANotification.dataset.openLabel);
-        event.stopPropagation();
-      }
-    }
-  
-    // Hide popups when there is a click outside their element
-    function hidePopupsOnClickOutside(event) {
-      const isAnyPopupClicked = popups.some((popup) => {
-        return popup.contains(event.target);
-      });
-      if (isAnyPopupClicked) {
+const TOGGLESETUP = () => {
+  const ALERTS_BTN = document.getElementById("alerts-btn");
+  const ALERTS_CONTAINER = document.getElementById("alerts");
+  const ALERTS_ARIA_NOTIFICATION = document.getElementById("alerts-notify");
+
+  const MENU_BTN = document.getElementById("menu-btn");
+  const MENU = document.getElementById("menu");
+  const MENU_ITEMS = document.querySelectorAll('[role="menuitem"]');
+  const MENU_ARIA_NOTIFICATION = document.getElementById("menu-notify");
+  const HIDDEN_CLASS = "hidden";
+  const ACTIVE_CLASS = "active";
+  const ALERT_INDEX = 0;
+  const MENU_INDEX = 1;
+  const POPUPS = [ALERTS_CONTAINER, MENU];
+  const POPUP_BTNS = [ALERTS_BTN, MENU_BTN];
+  const POPUPS_ARIA_NOTIFICATION = [ALERTS_ARIA_NOTIFICATION, MENU_ARIA_NOTIFICATION];
+
+  const CALLOUT = document.getElementById("callout");
+  const CALLOUT_CLOSE_BTN = document.getElementById("callout-close-btn");
+  const CALLOUT_ARIA_NOTIFICATION = document.getElementById("callout-notify");
+
+  const TOGGLE_SETUP_BTN = document.getElementById("toggle-setup-btn");
+  const SETUP = document.getElementById("setup");
+  const TOGGLE_SETUP_ARIA_NOTIFICATION = document.getElementById("toggle-setup-notify");
+
+  const TOGGLE_SETUP_STEP_VISIBILITY_BTNS = document.querySelectorAll(".setup-step-toggle");
+  const SETUP_STEPS = [...document.querySelectorAll(".setup-step")];
+  const SETUP_STEPS_ARIA_NOTIFICATIONS = document.querySelectorAll(".setup-step-notify");
+
+  const TOGGLE_SETUP_STEP_COMPLETE_BTNS = document.querySelectorAll(".check-step-btn");
+  const TOGGLE_COMPLETE_ARIA_NOTIFICATIONS = document.querySelectorAll(".check-step-btn-notify");
+  const PROGRESSBAR = document.getElementById("progess-bar");
+  const PROGRESS_COUNT = document.getElementById("progress-count");
+
+  function HIDE_POPUPS() {
+    POPUPS.forEach((popup, index) => {
+      const IS_POPUP_OPEN = !popup.classList.contains(HIDDEN_CLASS);
+      if (!IS_POPUP_OPEN) {
         return;
       }
-  
-      hidePopups();
-    }
-  
-    function focusFirstMenuItem() {
-      menuItems.item(0).focus();
-    }
-  
-    // Hide popup on escape key press
-    function handleEscapeKeyPress(event) {
-      if (event.key === "Escape") {
-        hidePopups();
-      }
-    }
-  
-    // Move focus to next or previous menu item on arrow key press
-    function handleMenuItemKeyPress(event, menuItemIndex) {
-      let nextMenuItemIndex;
-  
-      if (event.key === "ArrowDown" || event.key === "ArrowRight") {
-        // Move to next menu item
-        nextMenuItemIndex = modNumber(menuItemIndex + 1, menuItems.length);
-      } else if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
-        // Move to previous menu item
-        nextMenuItemIndex = modNumber(menuItemIndex - 1, menuItems.length);
-      } else if (event.key === "Home") {
-        // Move to first menu item
-        nextMenuItemIndex = 0;
-      } else if (event.key === "End") {
-        // Move to last menu item
-        nextMenuItemIndex = menuItems.length - 1;
-      } else {
-        // Do nothing on an other key press
-        return;
-      }
-  
-      menuItems.item(nextMenuItemIndex).focus();
-    }
-  
-    // Toggle visibility of setup steps
-    function toggleSetup() {
-      setup.classList.toggle(HIDDEN_CLASS);
-  
-      const isOpen = !setup.classList.contains(HIDDEN_CLASS);
-      if (isOpen) {
-        toggleSetupARIANotification.setAttribute("aria-label", "Setup opened");
-      } else {
-        toggleSetupARIANotification.setAttribute("aria-label", "Setup closed");
-      }
-  
-      toggleSetupBtn.setAttribute("aria-expanded", isOpen);
-      toggleSetupBtn.dataset.isOpen = isOpen ? "" : true;
-    }
-  
-    // Hide other setup steps and show active one
-    function showSetupStep(setupStepIndex) {
-      hideSetupSteps();
-      setupSteps[setupStepIndex].classList.add(ACTIVE_CLASS);
-  
-      const setupStepARIANotification = setupStepsARIANotifications.item(setupStepIndex);
-      setupStepARIANotification.setAttribute("aria-label", `Setup step ${setupStepIndex + 1} opened`);
-  
-      toggleSetupStepVisibiltyBtns.item(setupStepIndex).setAttribute("aria-expanded", true);
-    }
-  
-    // Hide other setup steps
-    function hideSetupSteps() {
-      setupSteps.forEach((el, index) => {
-        const isClosed = !el.classList.contains(ACTIVE_CLASS);
-        if (isClosed) {
-          return;
-        }
-  
-        el.classList.remove(ACTIVE_CLASS);
-        setupStepsARIANotifications
-          .item(index)
-          .setAttribute("aria-label", `Setup step ${index + 1} closed`);
-      });
-  
-      toggleSetupStepVisibiltyBtns.forEach((btn) => btn.setAttribute("aria-expanded", false));
-    }
-  
-    // Update aria attributes for check button for setup steps
-    function updateARIAForToggleCompleteBtn(toggleBtnIndex) {
-      const setupStep = setupSteps[toggleBtnIndex];
-      const isSetupStepComplete = !!setupStep.dataset.isCompleted;
-      const toggleBtn = toggleSetupStepCompleteBtns[toggleBtnIndex];
-      const toggleCompleteARIANotification = toggleCompleteARIANotifications.item(toggleBtnIndex);
-  
-      if (isSetupStepComplete) {
-        toggleBtn.setAttribute("aria-label", "Mark step incomplete");
-        toggleCompleteARIANotification.setAttribute("aria-label", "Setup step marked complete");
-      } else {
-        toggleCompleteARIANotification.setAttribute("aria-label", "Setup step marked incomplete");
-        toggleBtn.setAttribute("aria-label", "Mark step complete");
-      }
-    }
-  
-    // Toggle setup step complete, update progress indicator and open next
-    // uncompleted setup step
-    function toggleSetupStepComplete(toggleBtnIndex) {
-      const setupStep = setupSteps[toggleBtnIndex];
-      const isSetupStepComplete = !!setupStep.dataset.isCompleted;
-      setupStep.dataset.isCompleted = isSetupStepComplete ? "" : true;
-  
-      updateProgressBar();
-      updateARIAForToggleCompleteBtn(toggleBtnIndex);
-  
-      const nextStepIndex = findNextUncompletedStepIndex(setupSteps);
-      if (nextStepIndex !== -1) {
-        showSetupStep(nextStepIndex);
-      }
-    }
-  
-    // Return index of next uncompleted setup step
-    function findNextUncompletedStepIndex(setupSteps) {
-      const nextStepIndex = setupSteps.findIndex((step) => !step.dataset.isCompleted);
-      return nextStepIndex;
-    }
-  
-    // Update progress count and indicator
-    function updateProgressBar() {
-      const completedStepsNo = setupSteps.filter((step) => step.dataset.isCompleted).length;
-      progressbar.style.width = `${completedStepsNo * 20}%`;
-      progressCount.innerText = completedStepsNo;
-    }
-  
-    // Modulus function that works with negative numbers
-    function modNumber(num, n) {
-      return ((num % n) + n) % n;
-    }
-  
-    // Toggle alerts visibility on alerts button click
-    alertsBtn.addEventListener("click", (event) => {
-      togglePopup(event, ALERT_INDEX);
-    });
-  
-    // Toggle menu visibility on menu button click
-    menuBtn.addEventListener("click", (event) => {
-      togglePopup(event, MENU_INDEX);
-  
-      const isMenuOpen = !menu.classList.contains(HIDDEN_CLASS);
-      if (isMenuOpen) {
-        focusFirstMenuItem();
-      }
-    });
-  
-    // Close popups on escape key press
-    popups.forEach((popup) => {
-      popup.addEventListener("keyup", handleEscapeKeyPress);
-    });
-    alertsBtn.addEventListener("keyup", handleEscapeKeyPress);
-  
-    // Handle menu item focus on key press
-    menuItems.forEach((menuItem, index) =>
-      menuItem.addEventListener("keyup", (event) => handleMenuItemKeyPress(event, index))
-    );
-  
-    document.addEventListener("click", hidePopupsOnClickOutside);
-  
-    // Hide callout
-    calloutCloseBtn.addEventListener("click", () => {
-      callout.classList.add(HIDDEN_CLASS);
-      calloutARIANotification.setAttribute("aria-label", "Callout removed");
-    });
-  
-    toggleSetupBtn.addEventListener("click", toggleSetup);
-    toggleSetupStepVisibiltyBtns.forEach((btn, btnIndex) => {
-      btn.addEventListener("click", () => showSetupStep(btnIndex));
-    });
-  
-    toggleSetupStepCompleteBtns.forEach((btn, btnIndex) => {
-      btn.addEventListener("click", () => toggleSetupStepComplete(btnIndex));
+
+      popup.classList.add(HIDDEN_CLASS);
+      POPUP_BTNS[index].setAttribute("aria-expanded", false);
+      const POPUP_ARIA_NOTIFICATION = POPUPS_ARIA_NOTIFICATION[index];
+      POPUP_ARIA_NOTIFICATION.setAttribute("aria-label", POPUP_ARIA_NOTIFICATION.dataset.closeLabel);
     });
   }
-  
-  app();
-  
+
+  function TOGGLE_POPUP(event, POPUP_INDEX) {
+    const POPUP = POPUPS[POPUP_INDEX];
+    const POPUP_BTN = POPUP_BTNS[POPUP_INDEX];
+    const IS_POPUP_OPEN = !POPUP.classList.contains(HIDDEN_CLASS);
+    HIDE_POPUPS();
+
+    if (!IS_POPUP_OPEN) {
+      POPUP.classList.remove(HIDDEN_CLASS);
+      POPUP_BTN.setAttribute("aria-expanded", true);
+      const POPUP_ARIA_NOTIFICATION = POPUPS_ARIA_NOTIFICATION[POPUP_INDEX];
+      POPUP_ARIA_NOTIFICATION.setAttribute("aria-label", POPUP_ARIA_NOTIFICATION.dataset.openLabel);
+      event.stopPropagation();
+    }
+  }
+
+  function HIDE_POPUPS_ON_CLICK_OUTSIDE(event) {
+    const IS_ANY_POPUP_CLICKED = POPUPS.some((popup) => {
+      return popup.contains(event.target);
+    });
+    if (IS_ANY_POPUP_CLICKED) {
+      return;
+    }
+
+    HIDE_POPUPS();
+  }
+
+  function FOCUS_FIRST_MENU_ITEM() {
+    MENU_ITEMS.item(0).focus();
+  }
+
+  function HANDLE_ESCAPE_KEY_PRESS(event) {
+    if (event.key === "Escape") {
+      HIDE_POPUPS();
+    }
+  }
+
+  function HANDLE_MENU_ITEM_KEY_PRESS(event, MENU_ITEM_INDEX) {
+    let NEXT_MENU_ITEM_INDEX;
+
+    if (event.key === "ArrowDown" || event.key === "ArrowRight") {
+      NEXT_MENU_ITEM_INDEX = MOD_NUMBER(MENU_ITEM_INDEX + 1, MENU_ITEMS.length);
+    } else if (event.key === "ArrowUp" || event.key === "ArrowLeft") {
+      NEXT_MENU_ITEM_INDEX = MOD_NUMBER(MENU_ITEM_INDEX - 1, MENU_ITEMS.length);
+    } else if (event.key === "Home") {
+      NEXT_MENU_ITEM_INDEX = 0;
+    } else if (event.key === "End") {
+      NEXT_MENU_ITEM_INDEX = MENU_ITEMS.length - 1;
+    } else {
+      return;
+    }
+
+    MENU_ITEMS.item(NEXT_MENU_ITEM_INDEX).focus();
+  }
+
+  function TOGGLE_SETUP() {
+    SETUP.classList.toggle(HIDDEN_CLASS);
+
+    const IS_OPEN = !SETUP.classList.contains(HIDDEN_CLASS);
+    if (IS_OPEN) {
+      TOGGLE_SETUP_ARIA_NOTIFICATION.setAttribute("aria-label", "Setup opened");
+    } else {
+      TOGGLE_SETUP_ARIA_NOTIFICATION.setAttribute("aria-label", "Setup closed");
+    }
+
+    TOGGLE_SETUP_BTN.setAttribute("aria-expanded", IS_OPEN);
+    TOGGLE_SETUP_BTN.dataset.isOpen = IS_OPEN ? "" : true;
+  }
+
+  function SHOW_SETUP_STEP(SETUP_STEP_INDEX) {
+    HIDE_SETUP_STEPS();
+    SETUP_STEPS[SETUP_STEP_INDEX].classList.add(ACTIVE_CLASS);
+
+    const SETUP_STEP_ARIA_NOTIFICATION = SETUP_STEPS_ARIA_NOTIFICATIONS.item(SETUP_STEP_INDEX);
+    SETUP_STEP_ARIA_NOTIFICATION.setAttribute("aria-label", `Setup step ${SETUP_STEP_INDEX + 1} opened`);
+
+    TOGGLE_SETUP_STEP_VISIBILITY_BTNS.item(SETUP_STEP_INDEX).setAttribute("aria-expanded", true);
+  }
+
+  function HIDE_SETUP_STEPS() {
+    SETUP_STEPS.forEach((el, INDEX) => {
+      const IS_CLOSED = !el.classList.contains(ACTIVE_CLASS);
+      if (IS_CLOSED) {
+        return;
+      }
+
+      el.classList.remove(ACTIVE_CLASS);
+      SETUP_STEPS_ARIA_NOTIFICATIONS
+        .item(INDEX)
+        .setAttribute("aria-label", `Setup step ${INDEX + 1} closed`);
+    });
+
+    TOGGLE_SETUP_STEP_VISIBILITY_BTNS.forEach((btn) => btn.setAttribute("aria-expanded", false));
+  }
+
+  function UPDATE_ARIA_FOR_TOGGLE_COMPLETE_BTN(TOGGLE_BTN_INDEX) {
+    const SETUP_STEP = SETUP_STEPS[TOGGLE_BTN_INDEX];
+    const IS_SETUP_STEP_COMPLETE = !!SETUP_STEP.dataset.isCompleted;
+    const TOGGLE_BTN = TOGGLE_SETUP_STEP_COMPLETE_BTNS[TOGGLE_BTN_INDEX];
+    const TOGGLE_COMPLETE_ARIA_NOTIFICATION = TOGGLE_COMPLETE_ARIA_NOTIFICATIONS.item(TOGGLE_BTN_INDEX);
+
+    if (IS_SETUP_STEP_COMPLETE) {
+      TOGGLE_BTN.setAttribute("aria-label", "Mark step incomplete");
+      TOGGLE_COMPLETE_ARIA_NOTIFICATION.setAttribute("aria-label", "Setup step marked complete");
+    } else {
+      TOGGLE_COMPLETE_ARIA_NOTIFICATION.setAttribute("aria-label", "Setup step marked incomplete");
+      TOGGLE_BTN.setAttribute("aria-label", "Mark step complete");
+    }
+  }
+
+  function TOGGLE_SETUP_STEP_COMPLETE(TOGGLE_BTN_INDEX) {
+    const SETUP_STEP = SETUP_STEPS[TOGGLE_BTN_INDEX];
+    const IS_SETUP_STEP_COMPLETE = !!SETUP_STEP.dataset.isCompleted;
+    SETUP_STEP.dataset.isCompleted = IS_SETUP_STEP_COMPLETE ? "" : true;
+
+    UPDATE_PROGRESS_BAR();
+    UPDATE_ARIA_FOR_TOGGLE_COMPLETE_BTN(TOGGLE_BTN_INDEX);
+
+    const NEXT_STEP_INDEX = FIND_NEXT_UNCOMPLETED_STEP_INDEX(SETUP_STEPS);
+    if (NEXT_STEP_INDEX !== -1) {
+      SHOW_SETUP_STEP(NEXT_STEP_INDEX);
+    }
+  }
+
+  function FIND_NEXT_UNCOMPLETED_STEP_INDEX(SETUP_STEPS) {
+    const NEXT_STEP_INDEX = SETUP_STEPS.findIndex((STEP) => !STEP.dataset.isCompleted);
+    return NEXT_STEP_INDEX;
+  }
+
+  function UPDATE_PROGRESS_BAR() {
+    const COMPLETED_STEPS_NO = SETUP_STEPS.filter((STEP) => STEP.dataset.isCompleted).length;
+    PROGRESSBAR.style.width = `${COMPLETED_STEPS_NO * 20}%`;
+    PROGRESS_COUNT.innerText = COMPLETED_STEPS_NO;
+  }
+
+  function MOD_NUMBER(NUM, N) {
+    return ((NUM % N) + N) % N;
+  }
+
+  ALERTS_BTN.addEventListener("click", (EVENT) => {
+    TOGGLE_POPUP(EVENT, ALERT_INDEX);
+  });
+
+  MENU_BTN.addEventListener("click", (EVENT) => {
+    TOGGLE_POPUP(EVENT, MENU_INDEX);
+
+    const IS_MENU_OPEN = !MENU.classList.contains(HIDDEN_CLASS);
+    if (IS_MENU_OPEN) {
+      FOCUS_FIRST_MENU_ITEM();
+    }
+  });
+
+  POPUPS.forEach((POPUP) => {
+    POPUP.addEventListener("keyup", HANDLE_ESCAPE_KEY_PRESS);
+  });
+  ALERTS_BTN.addEventListener("keyup", HANDLE_ESCAPE_KEY_PRESS);
+
+  MENU_ITEMS.forEach((MENU_ITEM, INDEX) =>
+    MENU_ITEM.addEventListener("keyup", (EVENT) => HANDLE_MENU_ITEM_KEY_PRESS(EVENT, INDEX))
+  );
+
+  document.addEventListener("click", HIDE_POPUPS_ON_CLICK_OUTSIDE);
+
+  CALLOUT_CLOSE_BTN.addEventListener("click", () => {
+    CALLOUT.classList.add(HIDDEN_CLASS);
+    CALLOUT_ARIA_NOTIFICATION.setAttribute("aria-label", "Callout removed");
+  });
+
+  TOGGLE_SETUP_BTN.addEventListener("click", TOGGLE_SETUP);
+  TOGGLE_SETUP_STEP_VISIBILITY_BTNS.forEach((BTN, BTN_INDEX) => {
+    BTN.addEventListener("click", () => SHOW_SETUP_STEP(BTN_INDEX));
+  });
+
+  TOGGLE_SETUP_STEP_COMPLETE_BTNS.forEach((BTN, BTN_INDEX) => {
+    BTN.addEventListener("click", () => TOGGLE_SETUP_STEP_COMPLETE(BTN_INDEX));
+  });
+}
+
+TOGGLESETUP();
