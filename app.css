@@ -4,37 +4,10 @@
 }
 
 
-
-
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-/* GENERAL STYLES */
-
-:root {
-  --color-gray-100: #b5b5b5;
-  --color-gray-200: #303030;
-  --color-gray-300: #1a1a1a;
-  --color-background: #f1f1f1;
-  --font-light: #e3e3e3;
-  --font-dark: #323232;
-  --font-mid-2: #616161;
-  --stroke-s-200: #616161;
-  --stroke-s-100: #e1e1e1;
-  --stroke-s-50: #dbdbdb;
-  --stroke-light-100: rgba(255, 255, 255, 0.2);
-  --states-focused: #005bd3;
-  --states-hover: #f1f1f1;
-}
-
 body {
   line-height: 1.4;
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: var(--color-background);
+  font-family: "Inter", sans-serif;
+  background-color: #f1f1f1;
 }
 
 * {
@@ -54,6 +27,11 @@ a {
   text-decoration: none;
 }
 
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
 button {
   background-color: inherit;
   color: inherit;
@@ -69,7 +47,7 @@ button {
 
 
 .notification-pane {
-  background-color: var(--color-gray-300);
+  background-color: #1a1a1a;
   margin-bottom: 32px;
   height: 56px;
 }
@@ -106,7 +84,7 @@ h6 {
   display: none;
 }
 
-.icon {
+.svgStyle {
   width: 20px;
   height: 20px;
 }
@@ -127,17 +105,17 @@ h6 {
   font-size: 13px;
   margin: 0 auto;
   height: 32px;
-  color: var(--font-light);
+  color: #e3e3e3;
   width: 100%;
-  background-color: var(--color-gray-200);
-  border: 1px var(--stroke-s-200) solid;
+  background-color: #303030;
+  border: 1px #616161 solid;
   border-radius: 8px;
   font-weight: 500;
 }
 
 
 .inputField:hover {
-  border-color: var(--stroke-s-100);
+  border-color: #e1e1e1;
 }
 
 .inputField:focus-visible,
@@ -147,17 +125,17 @@ h6 {
 }
 
 .inputField::placeholder {
-  color: var(--color-gray-100);
+  color: #b5b5b5;
 }
 
-.search .icon {
+.search .svgStyle {
   position: absolute;
   height: 20px;
   top: 0;
   bottom: 0;
   left: 8px;
   margin: auto 0;
-  fill: var(--color-gray-100);
+  fill: #b5b5b5;
 }
 
 .notification-pane .profileBox {
@@ -166,11 +144,11 @@ h6 {
   gap: 8px;
 }
 
-.alerts-btn {
+.notifyButton {
   width: 32px;
   height: 32px;
   border-radius: 8px;
-  background-color: var(--color-gray-200);
+  background-color: #303030;
   display: grid;
   place-items: center;
 }
@@ -180,7 +158,7 @@ h6 {
   align-items: center;
   gap: 8px;
   padding: 2px 2px 2px 16px;
-  color: var(--font-light);
+  color: #e3e3e3;
   font-size: 12px;
   font-weight: 500;
 }
@@ -189,27 +167,27 @@ h6 {
   width: 96px;
 }
 
-.alerts-btn,
+.notifyButton,
 .menu-btn {
   border-radius: 8px;
-  background-color: var(--color-gray-200);
+  background-color: #303030;
 }
 
 .menu-btn:hover,
-.alerts-btn:hover,
+.notifyButton:hover,
 .menu-btn:active,
-.alerts-btn:active,
+.notifyButton:active,
 .menu-btn:focus-visible,
 .menu-btn:focus,
-.alerts-btn:focus-visible,
-.alerts-btn:focus {
-  background-color: var(--font-mid-2);
+.notifyButton:focus-visible,
+.notifyButton:focus {
+  background-color: #616161;
 }
 
 .menu-btn:focus-visible,
 .menu-btn:focus,
-.alerts-btn:focus-visible,
-.alerts-btn:focus {
+.notifyButton:focus-visible,
+.notifyButton:focus {
   outline: 0;
   box-shadow: 0px 0px 0px 1px #000, 0px 0px 0px 3px #005bd3;
 }
@@ -218,9 +196,9 @@ h6 {
   max-width: 384px;
   padding: 16px;
   background-color: white;
-  color: var(--font-dark);
+  color: #323232;
   border-radius: 14px;
-  border: 1px solid var(--stroke-s-50);
+  border: 1px solid #dbdbdb;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.05);
 }
 
@@ -281,14 +259,14 @@ h6 {
 }
 
 .alerts button:focus {
-  outline: 1px var(--states-focused) solid;
+  outline: 1px #005bd3 solid;
 }
 
 .alerts p {
   padding: 16px;
-  color: var(--font-mid-2);
+  color: #616161;
   font-weight: 600;
-  background-color: var(--color-background);
+  background-color: #f1f1f1;
   font-size: 13px;
 }
 
@@ -296,7 +274,7 @@ h6 {
   max-width: 320px;
   width: calc(100% - 32px);
   border-radius: 14px;
-  border: 1px solid var(--stroke-s-50);
+  border: 1px solid #dbdbdb;
   background: #fff;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.05);
   font-size: 13px;
@@ -318,7 +296,7 @@ h6 {
 }
 
 .menu li.divider {
-  border-bottom: 0.75px solid var(--stroke-s-50, #dbdbdb);
+  border-bottom: 0.75px solid #dbdbdb, #dbdbdb;
   padding-bottom: 4px;
 }
 
@@ -333,16 +311,17 @@ h6 {
 
 .menu li a:hover,
 .menu li a:active {
-  background: var(--states-hover, #f1f1f1);
+  background: #f1f1f1, #f1f1f1;
 }
 
 .menu li a:focus-visible,
 .menu li a:focus {
-  outline: 2px solid var(--states-focused);
+  outline: 2px solid #005bd3;
 }
 
 .menu-title {
-  background-color: var(--color-background);
+  background-color: #f1f1f1
+  ;
   font-weight: 600;
   display: flex;
   justify-content: space-between;
@@ -360,7 +339,7 @@ h6 {
 
 .menu .user-email {
   font-size: 12px;
-  color: var(--font-mid-2);
+  color: #616161;
 }
 
 /* CALLOUT COMPONENTS */
@@ -368,8 +347,8 @@ h6 {
 .callout {
   padding: 12px 8px 12px 16px;
   margin: 0 auto 16px;
-  background-color: var(--color-gray-300);
-  color: var(--font-light);
+  background-color: #1a1a1a;
+  color: #e3e3e3;
   display: flex;
   gap: 16px;
   align-items: center;
@@ -394,7 +373,7 @@ h6 {
 }
 
 .callout .close-btn:hover {
-  background-color: var(--color-gray-200);
+  background-color: #303030;
 }
 
 /* ONBOARDING COMPONENTS */
@@ -406,9 +385,9 @@ h6 {
   border-radius: 18px;
   padding: 8px;
   margin-bottom: 32px;
-  color: var(--font-dark);
+  color: #323232;
   font-size: 13px;
-  border: 1px solid var(--stroke-s-50);
+  border: 1px solid #dbdbdb;
   box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.05);
 }
 
@@ -434,15 +413,15 @@ h6 {
   flex-shrink: 0;
 }
 
-#toggle-setup-btn .icon {
+#toggle-setup-btn .svgStyle {
   transition: transform 500ms ease-in;
 }
 
-#toggle-setup-btn[data-is-open="true"] .icon {
+#toggle-setup-btn[data-is-open="true"] .svgStyle {
   transform: rotate(180deg);
 }
 
-.onboarding > header .icon {
+.onboarding > header .svgStyle {
   fill: #4a4a4a;
 }
 
@@ -506,7 +485,7 @@ h6 {
 }
 
 .check-step-btn:focus {
-  outline: 2px var(--states-focused) solid;
+  outline: 2px #005bd3 solid;
   outline-offset: 1px;
 }
 
@@ -579,12 +558,12 @@ h6 {
 
 .setup-step p {
   margin: 0.75rem 0 1rem;
-  color: var(--font-mid-2);
+  color: #616161;
   font-weight: 500;
 }
 
 .setup-step a {
-  color: var(--states-focused);
+  color: #005bd3;
   font-size: 0.875rem;
   font-weight: 500;
 }
@@ -600,11 +579,11 @@ h6 {
   gap: 16px;
 }
 
-/* BUTTON COMPONENTS */
+/*********** BUTTON COMPONENTS ***********/
 
-.btn-light {
+.lightButton {
   background-color: #fff;
-  color: var(--font-dark);
+  color: #323232;
   border-radius: 6px;
   padding: 6px 12px;
   font-weight: 600;
@@ -614,50 +593,51 @@ h6 {
   box-shadow: 0px -1px 0px 0px #b5b5b5 inset;
 }
 
-.btn-light:hover,
-.btn-light:active {
+.lightButton:hover,
+.lightButton:active {
   background: #f7f7f7;
 }
 
-.btn-light:active {
+
+.lightButton:active {
   box-shadow: 0px 2px 1.5px 0px #e2e2e2 inset;
   border: 0;
 }
 
-.btn-light:focus-visible,
-.btn-light:focus {
+.lightButton:focus-visible,
+.lightButton:focus {
   outline: 2px #005bd3 solid;
   outline-offset: 1px;
   box-shadow: 0px -1px 0px 0px #b5b5b5 inset;
 }
 
-.btn-dark {
+.darkButton {
   padding: 6px 12px;
   border-radius: 6px;
-  border-top: 1.5px solid var(--stroke-light-100, rgba(255, 255, 255, 0.2));
-  border-right: 1.5px solid var(--stroke-light-100, rgba(255, 255, 255, 0.2));
-  border-left: 1.5px solid var(--stroke-light-100, rgba(255, 255, 255, 0.2));
+  border-top: 1.5px solid rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2);
+  border-right: 1.5px solid rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2);
+  border-left: 1.5px solid rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2);
   background: #404040;
   box-shadow: 0px 2px 0px 0px #000, 0px 1px 0px 1.5px #333,
     0px 0px 0px 1.5px #333;
   font-size: 12px;
-  color: var(--font-light);
+  color: #e3e3e3;
   line-height: 130%;
   font-weight: 600;
 }
 
-.btn-dark:hover {
+.darkButton:hover {
   background: #2a2a2a;
 }
 
-.btn-dark:active {
+.darkButton:active {
   background: #2b2b2b;
   border: 0;
   box-shadow: 0px 3px 0px 0px #000 inset, 0px 0px 0px 1.5px #333;
 }
 
-.btn-dark:focus-visible,
-.btn-dark:focus {
+.darkButton:focus-visible,
+.darkButton:focus {
   outline: 0;
   box-shadow: 0px 0px 0px 1.5px #333, 0px 0px 0px 3px #fff,
     0px 0px 0px 5px #005bd3;
@@ -680,20 +660,20 @@ h6 {
 
 .btn-plain:focus-visible,
 .btn-plain:focus {
-  outline: 2px solid var(--states-focused);
+  outline: 2px solid #005bd3;
 }
 
 
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
+.screen-reader-text {
   padding: 0;
-  margin: -1px;
-  overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
+  width: 1px;
+  position: absolute;
   border-width: 0;
+  height: 1px;
+  overflow: hidden;
+  margin: -1px;
 }
 
 .hidden {
@@ -753,7 +733,7 @@ h6 {
     background-color: inherit;
   }
 
-  .alerts-btn {
+  .notifyButton {
     padding: 6px;
     background-color: inherit;
   }

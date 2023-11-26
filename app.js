@@ -1,6 +1,5 @@
-const TOGGLESETUP = () => {
-  const ALERTS_BTN = document.getElementById("notification-btn");
-  const ALERTS_CONTAINER = document.getElementById("alerts");
+  const ALERTS_BTN = document.getElementById("notifications");
+  const ALERTS_CONTAINER = document.getElementById("notification-btn");
   const ALERTS_ARIA_NOTIFICATION = document.getElementById("alerts-notify");
 
   const MENU_BTN = document.getElementById("menu-btn");
@@ -15,9 +14,9 @@ const TOGGLESETUP = () => {
   const POPUP_BTNS = [ALERTS_BTN, MENU_BTN];
   const POPUPS_ARIA_NOTIFICATION = [ALERTS_ARIA_NOTIFICATION, MENU_ARIA_NOTIFICATION];
 
-  const CALLOUT = document.getElementById("callout");
-  const CALLOUT_CLOSE_BTN = document.getElementById("callout-close-btn");
-  const CALLOUT_ARIA_NOTIFICATION = document.getElementById("callout-notify");
+  const TRIAL_CALLOUT = document.getElementById("callout");
+  const TRIAL_CALLOUT_CLOSE_BTN = document.getElementById("trial-callout-close-button");
+  const TRIAL_CALLOUT_ARIA_NOTIFICATION = document.getElementById("trial-callout");
 
   const TOGGLE_SETUP_BTN = document.getElementById("toggle-setup-btn");
   const SETUP = document.getElementById("setup");
@@ -208,9 +207,9 @@ const TOGGLESETUP = () => {
 
   document.addEventListener("click", HIDE_POPUPS_ON_CLICK_OUTSIDE);
 
-  CALLOUT_CLOSE_BTN.addEventListener("click", () => {
-    CALLOUT.classList.add(HIDDEN_CLASS);
-    CALLOUT_ARIA_NOTIFICATION.setAttribute("aria-label", "Callout removed");
+  TRIAL_CALLOUT_CLOSE_BTN.addEventListener("click", () => {
+    TRIAL_CALLOUT.classList.add(HIDDEN_CLASS);
+    TRIAL_CALLOUT_ARIA_NOTIFICATION.setAttribute("aria-label", "Callout removed");
   });
 
   TOGGLE_SETUP_BTN.addEventListener("click", TOGGLE_SETUP);
@@ -221,6 +220,3 @@ const TOGGLESETUP = () => {
   TOGGLE_SETUP_STEP_COMPLETE_BTNS.forEach((BTN, BTN_INDEX) => {
     BTN.addEventListener("click", () => TOGGLE_SETUP_STEP_COMPLETE(BTN_INDEX));
   });
-}
-
-TOGGLESETUP();

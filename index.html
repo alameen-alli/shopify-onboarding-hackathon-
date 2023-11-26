@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Shopify onboarding dashboard" />
-    <title>Shopify Admin</title>
+    <title>Shopify Admin Dashboard - Hackathon</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,9 +16,9 @@
   <body>
     <header class="notification-pane">
       <div>
-        <div>
-          <a class="shopifyLink" href="https://shopify.com">
-            <span class="sr-only">Shopify</span>
+        <div class="shopify-logo-container">
+          <a href="https://shopify.com" target="_blank" class="shopifyLink">
+            <span class="screen-reader-text">Shopify</span>
             <svg
               class="large-logo"
               aria-hidden="true"
@@ -81,12 +81,12 @@
 
         <div class="search">
           <svg
-            aria-hidden="true"
-            class="icon"
+            class="svgStyle"
             xmlns="http://www.w3.org/2000/svg"
             width="32"
             height="32"
             viewBox="0 0 13 14"
+            aria-hidden="true"
             fill="none"
           >
             <path
@@ -96,22 +96,22 @@
             />
           </svg>
           <input
-            autocomplete="off"
-            id="search-input"
             type="text"
-            placeholder="Search"
+            id="search-input"
             class="inputField"
+            placeholder="Search"
+            autocomplete="off"
           />
         </div>
 
         <div class="profileBox">
-          <div>
+          <div class="notifyButton-container">
             <button
-              class="alerts-btn"
-              id="notification-btn"
-              aria-haspopup="true"
               aria-expanded="false"
-              aria-controls="alerts"
+              aria-controls="notifications"
+              aria-haspopup="true"
+              class="notifyButton"
+              id="notification-btn"
             >
               <svg
                 aria-hidden="true"
@@ -120,7 +120,7 @@
                 viewBox="0 0 21 20"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                class="icon"
+                class="svgStyle"
               >
                 <path
                   fill-rule="evenodd"
@@ -129,7 +129,7 @@
                   fill="#fff"
                 />
               </svg>
-              <span class="sr-only">Alerts button</span>
+              <span class="screen-reader-text">Notifications button</span>
             </button>
             <span
               aria-live="polite"
@@ -139,7 +139,7 @@
             ></span>
             <div
               class="alerts hidden"
-              id="alerts"
+              id="notifications"
               role="dialog"
               aria-labelledby="alerts-title"
             >
@@ -147,10 +147,10 @@
                 <h2 id="alerts-title">Alerts</h2>
                 <div class="flex-wrapper">
                   <button>
-                    <span class="sr-only">Filter</span>
+                    <span class="screen-reader-text">Filter</span>
                     <svg
                       aria-hidden="true"
-                      class="icon"
+                      class="svgStyle"
                       xmlns="http://www.w3.org/2000/svg"
                       width="20"
                       height="20"
@@ -173,10 +173,10 @@
                   </button>
 
                   <button>
-                    <span class="sr-only">Check all</span>
+                    <span class="screen-reader-text">Check all</span>
                     <svg
                       aria-hidden="true"
-                      class="icon"
+                      class="svgStyle"
                       xmlns="http://www.w3.org/2000/svg"
                       width="20"
                       height="20"
@@ -209,7 +209,7 @@
               aria-haspopup="true"
               aria-expanded="false"
               aria-controls="menu"
-              aria-label="Menu button"
+              aria-label="Profile Menu Button"
             >
               <span class="store-name">Davii Collections</span>
               <span class="user-img" aria-label="User image">DC</span>
@@ -239,7 +239,7 @@
                   <svg
                     class="check-icon"
                     aria-hidden="true"
-                    class="icon"
+                    class="svgStyle"
                     width="16"
                     height="16"
                     viewBox="0 0 16 16"
@@ -257,7 +257,7 @@
                       />
                     </g>
                   </svg>
-                  <span class="sr-only">User Menu</span>
+                  <span class="screen-reader-text">User Menu</span>
                 </h2>
               </li>
               <li class="divider">
@@ -265,7 +265,7 @@
                   <div class="flex-wrapper">
                     <svg
                       aria-hidden="true"
-                      class="icon"
+                      class="svgStyle"
                       width="41"
                       height="40"
                       viewBox="0 0 21 20"
@@ -330,19 +330,19 @@
       </div>
     </header>
 
-    <span aria-live="polite" id="callout-notify"></span>
+    <span aria-live="polite" id="trial-callout"></span>
     <div id="callout" class="callout">
       <div class="flex-wrapper">
         <p>Extend your trial for $1/month for 3 months on select plans.</p>
-        <a href="https://shopify.com/pricing" class="btn-light"
+        <a href="https://shopify.com/pricing" class="lightButton"
           >Select a plan</a
         >
       </div>
-      <button class="close-btn" id="callout-close-btn">
-        <span class="sr-only">Close callout</span>
+      <button class="close-btn" id="trial-callout-close-button">
+        <span class="screen-reader-text">Dismiss Trial Callout</span>
         <svg
           aria-hidden="true"
-          class="icon"
+          class="svgStyle"
           width="41"
           height="40"
           viewBox="0 0 21 20"
@@ -379,7 +379,7 @@
           <span>
             <svg
               aria-hidden="true"
-              class="icon"
+              class="svgStyle"
               xmlns="http://www.w3.org/2000/svg"
               width="20"
               height="20"
@@ -393,7 +393,7 @@
                 fill="#4A4A4A"
               />
             </svg>
-            <span class="sr-only">Expand or collapse setup</span>
+            <span class="screen-reader-text">Expand or collapse setup</span>
           </span>
         </button>
       </header>
@@ -512,7 +512,7 @@
                 >Learn more</a
               >
             </p>
-            <button class="btn-dark">Customize theme</button>
+            <button class="darkButton">Customize theme</button>
             <img
               src="https://crushingit.tech/hackathon-assets/customise-store.png"
               alt=""
