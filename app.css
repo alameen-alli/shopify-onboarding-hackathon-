@@ -254,7 +254,6 @@ body {
   max-height: calc(100% - 4rem);
   overflow-y: auto;
   z-index: 5;
-  animation: move-up 300ms ease-in;
 }
 
 .user-img {

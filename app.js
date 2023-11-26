@@ -1,5 +1,5 @@
 const TOGGLESETUP = () => {
-  const ALERTS_BTN = document.getElementById("alerts-btn");
+  const ALERTS_BTN = document.getElementById("notification-btn");
   const ALERTS_CONTAINER = document.getElementById("alerts");
   const ALERTS_ARIA_NOTIFICATION = document.getElementById("alerts-notify");
 
