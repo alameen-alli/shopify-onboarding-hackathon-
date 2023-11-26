@@ -17,7 +17,7 @@ const TRIAL_CALLOUT_CLOSE_BTN = document.getElementById(
 );
 const TRIAL_CALLOUT_ARIA_NOTIFICATION =
   document.getElementById("trial-callout");
-const TOGGLE_SETUP_BTN = document.getElementById("setupguide-toggle-button");
+const SETUPGUIDE_TOGGLE_CHECK = document.getElementById("setupguide-toggle-button");
 const SETUP = document.getElementById("setup");
 const TOGGLE_SETUP_ARIA_NOTIFICATION = document.getElementById(
   "toggle-setup-notify"
@@ -236,7 +236,7 @@ TRIAL_CALLOUT_CLOSE_BTN.addEventListener("click", () => {
   TRIAL_CALLOUT_ARIA_NOTIFICATION.setAttribute("aria-label", "Callout removed");
 });
 
-TOGGLE_SETUP_BTN.addEventListener("click", TOGGLE_SETUP);
+SETUPGUIDE_TOGGLE_CHECK.addEventListener("click", TOGGLE_SETUP);
 TOGGLE_SETUP_STEP_VISIBILITY_BTNS.forEach((BTN, BTN_INDEX) => {
   BTN.addEventListener("click", () => SHOW_SETUP_STEP(BTN_INDEX));
 });
