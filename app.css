@@ -153,7 +153,7 @@ h6 {
   place-items: center;
 }
 
-.menu-btn {
+.profile-menu-button {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -168,24 +168,24 @@ h6 {
 }
 
 .notifyButton,
-.menu-btn {
+.profile-menu-button {
   border-radius: 8px;
   background-color: #303030;
 }
 
-.menu-btn:hover,
+.profile-menu-button:hover,
 .notifyButton:hover,
-.menu-btn:active,
+.profile-menu-button:active,
 .notifyButton:active,
-.menu-btn:focus-visible,
-.menu-btn:focus,
+.profile-menu-button:focus-visible,
+.profile-menu-button:focus,
 .notifyButton:focus-visible,
 .notifyButton:focus {
   background-color: #616161;
 }
 
-.menu-btn:focus-visible,
-.menu-btn:focus,
+.profile-menu-button:focus-visible,
+.profile-menu-button:focus,
 .notifyButton:focus-visible,
 .notifyButton:focus {
   outline: 0;
@@ -246,7 +246,7 @@ h6 {
   margin-bottom: 16px;
 }
 
-.alerts header .flex-wrapper {
+.alerts header .block-content {
   gap: 8px;
 }
 
@@ -344,7 +344,7 @@ h6 {
 
 /* CALLOUT COMPONENTS */
 
-.callout {
+.trial-callout {
   padding: 12px 8px 12px 16px;
   margin: 0 auto 16px;
   background-color: #1a1a1a;
@@ -359,26 +359,26 @@ h6 {
   box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.05);
 }
 
-.callout .flex-wrapper {
+.trial-callout .block-content {
   flex-grow: 1;
   justify-content: space-between;
   flex-wrap: wrap;
   row-gap: 16px;
 }
 
-.callout .close-btn {
+.trial-callout .close-btn {
   padding: 8px;
   border-radius: 6px;
   flex-shrink: 0;
 }
 
-.callout .close-btn:hover {
+.trial-callout .close-btn:hover {
   background-color: #303030;
 }
 
 /* ONBOARDING COMPONENTS */
 
-.onboarding {
+.setupguide {
   max-width: 800px;
   margin: 16px auto 0;
   background-color: #fff;
@@ -391,19 +391,19 @@ h6 {
   box-shadow: 0px 1px 0px 0px rgba(0, 0, 0, 0.05);
 }
 
-.onboarding > header {
+.setupguide > header {
   display: flex;
   justify-content: space-between;
   padding: 8px;
 }
 
-.onboarding > header h2 {
+.setupguide > header h2 {
   font-size: 0.875rem;
   font-weight: 600;
   margin-bottom: 8px;
 }
 
-.onboarding > header p {
+.setupguide > header p {
   margin-bottom: 16px;
   font-size: 13px;
 }
@@ -421,7 +421,7 @@ h6 {
   transform: rotate(180deg);
 }
 
-.onboarding > header .svgStyle {
+.setupguide > header .svgStyle {
   fill: #4a4a4a;
 }
 
@@ -680,7 +680,7 @@ h6 {
   display: none;
 }
 
-.flex-wrapper {
+.block-content {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -717,8 +717,8 @@ h6 {
   .notification-pane > div {
     gap: 0.5rem;
   }
-  .callout,
-  .onboarding {
+  .trial-callout,
+  .setupguide {
     border-radius: 0;
   }
 
@@ -727,8 +727,8 @@ h6 {
   }
 }
 
-@media screen and (max-width: 48rem) {
-  .menu-btn {
+@media screen and (max-width: 768px) {
+  .profile-menu-button {
     padding: 2px;
     background-color: inherit;
   }
@@ -742,12 +742,12 @@ h6 {
     display: none;
   }
 
-  .callout {
+  .trial-callout {
     align-items: start;
     gap: 0;
   }
 
-  .callout .close-btn {
+  .trial-callout .close-btn {
     padding: 0.5rem;
   }
 }
