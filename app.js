@@ -31,7 +31,7 @@ const ACTIVE_CLASS = "active";
 const SETUPGUIDE_STEPS_ARIA_NOTIFICATIONS =
   document.querySelectorAll(".setup-step-notify");
 const SETUPGUIDE_STEPS_COMPLETE_BTNS =
-  document.querySelectorAll(".check-step-btn");
+  document.querySelectorAll(".check-button");
 const TOGGLE_ARIA_NOTIFICATIONS_ON_COMPLETE = document.querySelectorAll(
   ".check-step-btn-notify"
 );
