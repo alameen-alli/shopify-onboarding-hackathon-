@@ -210,13 +210,13 @@
             aria-controls="menu"
             aria-label="Profile Menu Button"
           >
-            <span class="store-name">Davii Collections</span>
-            <span class="user-img" aria-label="Profile Image Icon">DC</span>
+            <span class="business_attribute store-name">Davii Collections</span>
+            <span class="business_logo user-img" aria-label="Profile Image Icon">DC</span>
           </button>
           <span
             aria-live="polite"
             id="profile-menu-notify"
-            data-open-label="ProfileMenu opened"
+            data-open-label="Profile Menu opened"
             data-close-label="Profile Menu closed"
           ></span>
           <ul
@@ -339,7 +339,7 @@
         >
       </div>
       <button class="close-btn" id="trial-callout-close-button">
-        <span class="screen-reader-text">Dismiss Trial Callout</span>
+        <span class="screen-reader-text">Close Trial Callout</span>
         <svg
           aria-hidden="true"
           class="svgStyle"
@@ -371,12 +371,12 @@
         </div>
         <button
           id="setupguide-toggle-button"
-          class="transparent"
+          class="transparent chevron"
           aria-haspopup="true"
           aria-controls="setup"
           aria-expanded="true"
         >
-          <span>
+          <span class="chevron-span">
             <svg
               aria-hidden="true"
               class="svgStyle"
@@ -393,13 +393,13 @@
                 fill="#4A4A4A"
               />
             </svg>
-            <span class="screen-reader-text">Expand or collapse setup</span>
+            <span class="screen-reader-text">Expand or collapse setup guide</span>
           </span>
         </button>
       </div>
       <span id="toggle-setup-notify" aria-live="polite"></span>
 
-      <ul class="setup" id="setup">
+      <ul class="setupguide-section setup" id="setup">
         <li class="setup-step active">
           <div class="block-content">
             <button class="check-step-btn" aria-label="Mark step complete">

@@ -212,7 +212,7 @@ NOTIFICATIONS_BTN.addEventListener("click", (EVENT) => {
 PROFILE_MENU_BTN.addEventListener("click", (EVENT) => {
   TOGGLE_POPUP(EVENT, MENUID);
 
-  const IS_MENU_OPEN = !MENU.classList.contains(HIDDENSTYLE);
+  const IS_MENU_OPEN = MENU.classList.contains(HIDDENSTYLE);
   if (IS_MENU_OPEN) {
     FOCUS_FIRST_MENU_ITEM();
   }
