@@ -34,13 +34,13 @@ const SETUPGUIDE_PROGRESSBAR = document.getElementById(
 );
 const PROGRESS_COUNT = document.getElementById("setupguide-progress-count");
 const SETUPGUIDE_STEP_VISIBILITY_TOGGLE_BTNS =
-  document.querySelectorAll(".setup-step-toggle");
+  document.querySelectorAll(".toggle-check-buttons");
 const SETUPGUIDE_STEPS = [
   ...document.querySelectorAll(".setupguide-item"),
 ];
 const ACTIVE_CLASS = "active";
 const SETUPGUIDE_STEPS_ARIA_NOTIFICATIONS =
-  document.querySelectorAll(".setup-step-notify");
+  document.querySelectorAll(".notify-on-step-change");
 const SETUPGUIDE_STEPS_COMPLETE_BTNS =
   document.querySelectorAll(".check-button");
 const TOGGLE_ARIA_NOTIFICATIONS_ON_COMPLETE = document.querySelectorAll(
@@ -168,17 +168,17 @@ const UPDATE_ARIA_FOR_TOGGLE_COMPLETE_BTN = (TOGGLE_BTN_INDEX) => {
     TOGGLE_ARIA_NOTIFICATIONS_ON_COMPLETE.item(TOGGLE_BTN_INDEX);
 
   if (IS_SETUP_STEP_COMPLETE) {
-    TOGGLE_BTN.setAttribute("aria-label", "Mark step incomplete");
+        // TOGGLE_BTN.setAttribute("aria-label", "Checked");
     TOGGLE_COMPLETE_ARIA_NOTIFICATION.setAttribute(
       "aria-label",
-      "Setup step marked complete"
+      ` Step ${TOGGLE_BTN_INDEX + 1} checked`
     );
   } else {
     TOGGLE_COMPLETE_ARIA_NOTIFICATION.setAttribute(
       "aria-label",
-      "Setup step marked incomplete"
+      `Step ${TOGGLE_BTN_INDEX + 1} unchecked`
     );
-    TOGGLE_BTN.setAttribute("aria-label", "Mark step complete");
+    // TOGGLE_BTN.setAttribute("aria-label", "Unchecked");
   }
 };
 
@@ -221,7 +221,7 @@ NOTIFICATIONS_BTN.addEventListener("click", (EVENT) => {
 PROFILE_MENU_BTN.addEventListener("click", (EVENT) => {
   TOGGLE_POPUP(EVENT, MENUID);
 
-  const IS_MENU_OPEN = MENU.classList.contains(HIDDENSTYLE);
+  const IS_MENU_OPEN = !MENU.classList.contains(HIDDENSTYLE);
   if (IS_MENU_OPEN) {
     FOCUS_FIRST_MENU_ITEM();
   }

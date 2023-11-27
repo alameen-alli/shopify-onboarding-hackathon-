@@ -29,9 +29,6 @@ button {
   color: inherit;
 }
 
-.shopify-link {
-  width: fit-content;
-}
 
 
 .dashboard-nav-bar {
@@ -48,12 +45,17 @@ button {
 }
 
 
-.dashboard-nav-bar > div {
+.nav-bar {
   padding: 12px 16px;
   display: grid;
   grid-template-columns: 1fr 480px 1fr;
   margin: 0 auto;
 }
+
+.shopify-link {
+  width: fit-content;
+}
+
 
 p {
   overflow-wrap: break-word;
@@ -501,7 +503,7 @@ h6 {
 }
 
 .setupguide-item svg:nth-of-type(4) {
-  transition: transform 300ms linear;
+  transition: transform 800ms linear;
 }
 
 .setupguide-item[data-is-completed="true"] svg:nth-of-type(n) {
@@ -510,14 +512,14 @@ h6 {
 
 .setupguide-item[data-is-completed="true"] svg:nth-of-type(4) {
   opacity: 1;
-  transform: rotate(360deg);
+  transform: rotate(1800deg);
 }
 
 .setupguide-item svg:nth-of-type(5) {
   transition-property: opacity, transform;
   transition-delay: 300ms, 300ms;
-  transition-duration: 100ms, 100ms;
-  transform: scale(0.5) rotate(-90deg);
+  transition-duration: 100ms, 150ms;
+  transform: scale(0.5) rotate(-360deg);
 }
 
 .setupguide-item[data-is-completed="true"] svg:nth-of-type(5) {
@@ -685,7 +687,7 @@ h6 {
 /* MEDIA QUERIES */
 
 @media (max-width: 980px) {
-  .dashboard-nav-bar > div {
+  .nav-bar {
     display: flex;
     justify-content: space-between;
   }
@@ -699,7 +701,7 @@ h6 {
   }
 }
 
-@media screen and (max-width: 50rem) {
+@media (max-width: 50rem) {
   .dashboard-nav-bar {
     margin-bottom: 1.75rem;
   }
@@ -710,7 +712,7 @@ h6 {
     max-height: calc(100% - 4.25rem);
   }
 
-  .dashboard-nav-bar > div {
+  .nav-bar {
     gap: 0.5rem;
   }
   .trial-callout,
@@ -733,7 +735,7 @@ h6 {
   justify-content: center;
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .profile-menu-button {
     padding: 2px;
     background-color: inherit;

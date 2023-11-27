@@ -14,7 +14,7 @@
   </head>
   <body>
     <nav class="dashboard-nav-bar">
-      <div>
+      <div class="nav-bar">
         <div class="shopify-logo-container">
           <a href="https://shopify.com" target="_blank" class="shopify-link">
             <svg
@@ -355,7 +355,7 @@
       </button>
     </div>
 
-    <div class="setupguide">
+    <div class="setupguide" id="setup-guide">
       <div>
         <div>
           <h2>Setup guide</h2>
@@ -397,10 +397,10 @@
       </div>
       <span id="toggle-setup-notify" aria-live="polite"></span>
 
-      <ul class="setupguide-section setupguide-fz" id="setupguide-section-id">
+      <ul role="list" class="setupguide-section setupguide-fz" id="setupguide-section-id">
         <li class="setupguide-item active">
           <div class="block-content">
-            <button class="check-button" aria-label="Mark step complete">
+            <button role="listitem" class="check-button">
               <svg
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
@@ -491,17 +491,16 @@
             </button>
             <h3>
               <button
-                class="setup-step-toggle"
+                class="toggle-check-buttons"
                 aria-haspopup="true"
                 aria-expanded="true"
-                aria-controls="setup-step-1"
               >
                 Customize your online store
               </button>
             </h3>
           </div>
-          <span aria-live="polite" class="setup-step-notify"></span>
-          <div class="content" id="setup-step-1">
+          <span aria-live="polite" class="notify-on-step-change"></span>
+          <div class="content">
             <p>
               Choose a theme and add your logo, colors, and images to reflect
               your brand.
@@ -519,7 +518,7 @@
         </li>
         <li class="setupguide-item">
           <div class="block-content">
-            <button class="check-button" aria-label="Mark step complete">
+            <button role="listitem" class="check-button">
               <svg
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
@@ -610,17 +609,16 @@
             </button>
             <h3>
               <button
-                class="setup-step-toggle"
+                class="toggle-check-buttons"
                 aria-haspopup="true"
                 aria-expanded="false"
-                aria-controls="setup-step-2"
               >
                 Add your first product
               </button>
             </h3>
           </div>
-          <span aria-live="polite" class="setup-step-notify"></span>
-          <div class="content" id="setup-step-2">
+          <span aria-live="polite" class="notify-on-step-change"></span>
+          <div class="content">
             <p>
               Write a description, add photos, and set pricing for the products
               you plan to sell.
@@ -641,7 +639,7 @@
         </li>
         <li class="setupguide-item">
           <div class="block-content">
-            <button class="check-button" aria-label="Mark step complete">
+            <button role="listitem" class="check-button">
               <svg
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
@@ -732,17 +730,16 @@
             </button>
             <h3>
               <button
-                class="setup-step-toggle"
+                class="toggle-check-buttons"
                 aria-haspopup="true"
                 aria-expanded="false"
-                aria-controls="setup-step-3"
               >
                 Add a custom domain
               </button>
             </h3>
           </div>
-          <span aria-live="polite" class="setup-step-notify"></span>
-          <div class="content" id="setup-step-3">
+          <span aria-live="polite" class="notify-on-step-change"></span>
+          <div class="content">
             <p>
               Your current domain is 222219.myshopify.com but you can add a
               custom domain to help customers find your online store.
@@ -761,7 +758,7 @@
 
         <li class="setupguide-item">
           <div class="block-content">
-            <button class="check-button" aria-label="Mark step complete">
+            <button role="listitem" class="check-button">
               <svg
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
@@ -852,17 +849,16 @@
             </button>
             <h3>
               <button
-                class="setup-step-toggle"
+                class="toggle-check-buttons"
                 aria-haspopup="true"
                 aria-expanded="false"
-                aria-controls="setup-step-4"
               >
                 Name your store
               </button>
             </h3>
           </div>
-          <span aria-live="polite" class="setup-step-notify"></span>
-          <div class="content" id="setup-step-4">
+          <span aria-live="polite" class="notify-on-step-change"></span>
+          <div class="content">
             <p>
               Your temporary store name is currently Davii collections. The
               store name appears in your admin and your online store.
@@ -881,7 +877,7 @@
 
         <li class="setupguide-item">
           <div class="block-content">
-            <button class="check-button" aria-label="Mark step complete">
+            <button role="listitem" class="check-button">
               <svg
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
@@ -972,17 +968,16 @@
             </button>
             <h3>
               <button
-                class="setup-step-toggle"
+                class="toggle-check-buttons"
                 aria-haspopup="true"
                 aria-expanded="false"
-                aria-controls="setup-step-5"
               >
                 Setup a payment provider
               </button>
             </h3>
           </div>
-          <span aria-live="polite" class="setup-step-notify"></span>
-          <div class="content" id="setup-step-5">
+          <span aria-live="polite" class="notify-on-step-change"></span>
+          <div class="content">
             <p>
               Choose a payment provider to start accepting payments. You’ll need
               to create an account with the payment provider and set it up with
@@ -1000,6 +995,7 @@
           </div>
         </li>
       </ul>
+
     </div>
 
     <script src="./app.js"></script>
