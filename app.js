@@ -91,6 +91,7 @@ const FOCUS_FIRST_MENU_ITEM = () => PROFILE_OPTIONS.item(0).focus();
 const HANDLE_ESCAPE_KEY_PRESS = (event) => {
   if (event.key === "Escape") {
     HIDE_DROPDOWN();
+    PROFILE_MENU_BTN.focus()
   }
 };
 
@@ -197,7 +198,6 @@ const TOGGLE_SETUP_STEP_COMPLETE = (TOGGLE_BTN_INDEX) => {
     }
   } else {
     console.error("SETUP_STEP is undefined or null");
-    console.log(SETUPGUIDE_STEPS);
   }
 };
 
@@ -252,7 +252,6 @@ SETUPGUIDE_STEP_VISIBILITY_TOGGLE_BTNS.forEach((BTN, BTN_INDEX) => {
 
 SETUPGUIDE_STEPS_COMPLETE_BTNS.forEach((BTN, BTN_INDEX) => {
   BTN.addEventListener("click", () => {
-    console.log(BTN_INDEX);
     TOGGLE_SETUP_STEP_COMPLETE(BTN_INDEX);
   });
 });

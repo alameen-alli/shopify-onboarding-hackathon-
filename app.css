@@ -109,6 +109,7 @@ h6 {
   border: 1px #616161 solid;
   border-radius: 8px;
   font-weight: 500;
+  transition: all 250ms ease-in;
 }
 
 
@@ -149,6 +150,7 @@ h6 {
   background-color: #303030;
   display: grid;
   place-items: center;
+  transition: all 250ms ease-in;
 }
 
 .profile-menu-button {
@@ -159,6 +161,7 @@ h6 {
   color: #e3e3e3;
   font-size: 12px;
   font-weight: 500;
+  transition: all 250ms ease-in;
 }
 
 .store-name {
@@ -209,6 +212,18 @@ h6 {
   max-height: calc(100% - 64px);
   overflow-y: auto;
   z-index: 5;
+  animation: scale-fade-in 300ms ease-out;
+}
+
+@keyframes scale-fade-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .user-img {
@@ -318,8 +333,7 @@ h6 {
 }
 
 .menu-title {
-  background-color: #f1f1f1
-  ;
+  background-color: #f1f1f1;
   font-weight: 600;
   display: flex;
   justify-content: space-between;
@@ -366,6 +380,7 @@ h6 {
   padding: 8px;
   border-radius: 6px;
   flex-shrink: 0;
+  transition: all 250ms ease-in;
 }
 
 .trial-callout .close-btn:hover {
@@ -405,10 +420,11 @@ h6 {
 #setupguide-toggle-button {
   /* padding: 8px; */
   flex-shrink: 0;
+  transition: transform 250ms ease-in;
 }
 
 #setupguide-toggle-button .btn-icons {
-  transition: transform 200ms ease-in;
+  transition: transform 250ms ease-in;
 }
 
 #setupguide-toggle-button[data-is-open="true"] .btn-icons {
@@ -585,6 +601,7 @@ h6 {
   line-height: 130%;
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0px -1px 0px 0px #b5b5b5 inset;
+  transition: all 250ms ease-in;
 }
 
 .lightButton:hover,
@@ -618,6 +635,7 @@ h6 {
   color: #e3e3e3;
   line-height: 130%;
   font-weight: 600;
+  transition: all 250ms ease-in;
 }
 
 .darkButton:hover {
@@ -642,6 +660,7 @@ h6 {
   padding: 6px 12px;
   font-size: 12px;
   font-weight: 600;
+  transition: all 250ms ease-in !important;
 }
 
 .transparent:hover {
