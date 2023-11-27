@@ -21,20 +21,20 @@ ul {
 }
 
 button {
-  background-color: inherit;
-  color: inherit;
-  height: fit-content;
+  text-align: start;
   padding: 0;
   cursor: pointer;
-  text-align: start;
+  height: fit-content;
+  background-color: inherit;
+  color: inherit;
 }
 
-.shopifyLink {
+.shopify-link {
   width: fit-content;
 }
 
 
-.notification-pane {
+.dashboard-nav-bar {
   background-color: #1a1a1a;
   margin-bottom: 32px;
   height: 56px;
@@ -48,7 +48,7 @@ button {
 }
 
 
-.notification-pane > div {
+.dashboard-nav-bar > div {
   padding: 12px 16px;
   display: grid;
   grid-template-columns: 1fr 480px 1fr;
@@ -72,7 +72,7 @@ h6 {
   font-weight: inherit;
 }
 
-.notification-pane h1 {
+.dashboard-nav-bar h1 {
   flex-shrink: 0;
 }
 
@@ -80,12 +80,12 @@ h6 {
   display: none;
 }
 
-.svgStyle {
+.btn-icons {
   width: 20px;
   height: 20px;
 }
 
-.search {
+.search-box {
   position: relative;
   width: fit-content;
   height: fit-content;
@@ -124,7 +124,7 @@ h6 {
   color: #b5b5b5;
 }
 
-.search .svgStyle {
+.search-box .btn-icons {
   position: absolute;
   height: 20px;
   top: 0;
@@ -134,7 +134,7 @@ h6 {
   fill: #b5b5b5;
 }
 
-.notification-pane .profileBox {
+.dashboard-nav-bar .profileBox {
   justify-content: end;
   display: flex;
   gap: 8px;
@@ -405,15 +405,15 @@ h6 {
   flex-shrink: 0;
 }
 
-#setupguide-toggle-button .svgStyle {
+#setupguide-toggle-button .btn-icons {
   transition: transform 200ms ease-in;
 }
 
-#setupguide-toggle-button[data-is-open="true"] .svgStyle {
+#setupguide-toggle-button[data-is-open="true"] .btn-icons {
   transform: rotate(180deg);
 }
 
-.setupguide > div .svgStyle {
+.setupguide > div .btn-icons {
   fill: #4a4a4a;
 }
 
@@ -677,25 +677,29 @@ h6 {
   gap: 0.5rem;
 }
 
+.mobile-logo {
+  display: none;
+}
+
 /* MEDIA QUERIES */
 
 @media (max-width: 980px) {
-  .notification-pane > div {
+  .dashboard-nav-bar > div {
     display: flex;
     justify-content: space-between;
   }
 
-  .large-logo {
+  .desktop-logo {
     display: none;
   }
 
-  .small-logo {
+  .mobile-logo {
     display: block;
   }
 }
 
 @media screen and (max-width: 50rem) {
-  .notification-pane {
+  .dashboard-nav-bar {
     margin-bottom: 1.75rem;
   }
 
@@ -705,7 +709,7 @@ h6 {
     max-height: calc(100% - 4.25rem);
   }
 
-  .notification-pane > div {
+  .dashboard-nav-bar > div {
     gap: 0.5rem;
   }
   .trial-callout,
