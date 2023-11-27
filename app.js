@@ -1,7 +1,9 @@
 const PROFILE_MENU_BTN = document.getElementById("profile-menu-button");
 const MENU = document.getElementById("menu");
-const MENU_ITEMS = document.querySelectorAll('[role="menuitem"]');
-const PROFILE_MENU_ARIA_NOTIFICATION = document.getElementById("profile-menu-notify");
+const PROFILE_OPTIONS = document.querySelectorAll('[role="profile-menu-option"]');
+const PROFILE_MENU_ARIA_NOTIFICATION = document.getElementById(
+  "profile-menu-notify"
+);
 const HIDDENSTYLE = "hidden";
 const MENUID = 1;
 const NOTIFICATIONS_BTN = document.getElementById("notification-btn");
@@ -10,30 +12,39 @@ const ARIA_NOTIFICATIONS = document.getElementById("alerts-notify");
 const DROPDOWN = [NOTIFICATIONS_CONTAINER, MENU];
 const DROPDOWN_BTNS = [NOTIFICATIONS_BTN, PROFILE_MENU_BTN];
 const NOTIFICATIONID = 0;
-const DROPDOWN_ARIA_NOTIFICATION = [ARIA_NOTIFICATIONS, PROFILE_MENU_ARIA_NOTIFICATION];
+const DROPDOWN_ARIA_NOTIFICATION = [
+  ARIA_NOTIFICATIONS,
+  PROFILE_MENU_ARIA_NOTIFICATION,
+];
 const TRIAL_CALLOUT = document.getElementById("select-a-plan-callout");
 const TRIAL_CALLOUT_CLOSE_BTN = document.getElementById(
   "trial-callout-close-button"
 );
 const TRIAL_CALLOUT_ARIA_NOTIFICATION =
   document.getElementById("trial-callout");
-const SETUPGUIDE_TOGGLE_CHECK = document.getElementById("setupguide-toggle-button");
-const SETUP = document.getElementById("setup");
+const SETUPGUIDE_TOGGLE_CHECK = document.getElementById(
+  "setupguide-toggle-button"
+);
+const SETUP = document.getElementById("setupguide-section-id");
 const TOGGLE_SETUP_ARIA_NOTIFICATION = document.getElementById(
   "toggle-setup-notify"
 );
-const SETUPGUIDE_PROGRESSBAR = document.getElementById("setupguide-progess-bar");
+const SETUPGUIDE_PROGRESSBAR = document.getElementById(
+  "setupguide-progess-bar"
+);
 const PROGRESS_COUNT = document.getElementById("setupguide-progress-count");
 const SETUPGUIDE_STEP_VISIBILITY_TOGGLE_BTNS =
   document.querySelectorAll(".setup-step-toggle");
-const SETUPGUIDE_STEPS = [...document.querySelectorAll(".setup-step")];
+const SETUPGUIDE_STEPS = [
+  ...document.querySelectorAll(".setupguide-item"),
+];
 const ACTIVE_CLASS = "active";
 const SETUPGUIDE_STEPS_ARIA_NOTIFICATIONS =
   document.querySelectorAll(".setup-step-notify");
 const SETUPGUIDE_STEPS_COMPLETE_BTNS =
   document.querySelectorAll(".check-button");
 const TOGGLE_ARIA_NOTIFICATIONS_ON_COMPLETE = document.querySelectorAll(
-  ".check-step-btn-notify"
+  ".notify-on-check-change"
 );
 
 const HIDE_DROPDOWN = () => {
@@ -46,13 +57,9 @@ const HIDE_DROPDOWN = () => {
     popup.classList.add(HIDDENSTYLE);
     DROPDOWN_BTNS[index].setAttribute("aria-expanded", false);
     const DROPDOWN_ARIA = DROPDOWN_ARIA_NOTIFICATION[index];
-    DROPDOWN_ARIA.setAttribute(
-      "aria-label",
-      DROPDOWN_ARIA.dataset.closeLabel
-    );
+    DROPDOWN_ARIA.setAttribute("aria-label", DROPDOWN_ARIA.dataset.closeLabel);
   });
 };
-
 
 const TOGGLE_POPUP = (event, DROPDOWNID) => {
   const POPUP = DROPDOWN[DROPDOWNID];
@@ -65,23 +72,21 @@ const TOGGLE_POPUP = (event, DROPDOWNID) => {
     POPUP.classList.remove(HIDDENSTYLE);
     POPUP_BTN.setAttribute("aria-expanded", true);
     const DROPDOWN_ARIA = DROPDOWN_ARIA_NOTIFICATION[DROPDOWNID];
-    DROPDOWN_ARIA.setAttribute(
-      "aria-label",
-      DROPDOWN_ARIA.dataset.openLabel
-    );
+    DROPDOWN_ARIA.setAttribute("aria-label", DROPDOWN_ARIA.dataset.openLabel);
     event.stopPropagation();
   }
 };
 
-
 const HIDE_DROPDOWN_ON_CLICK_OUTSIDE = (event) => {
-  const IS_ANY_POPUP_CLICKED = DROPDOWN.some((popup) => popup.contains(event.target));
+  const IS_ANY_POPUP_CLICKED = DROPDOWN.some((popup) =>
+    popup.contains(event.target)
+  );
   if (!IS_ANY_POPUP_CLICKED) {
     HIDE_DROPDOWN();
   }
 };
 
-const FOCUS_FIRST_MENU_ITEM = () => MENU_ITEMS.item(0).focus();
+const FOCUS_FIRST_MENU_ITEM = () => PROFILE_OPTIONS.item(0).focus();
 
 const HANDLE_ESCAPE_KEY_PRESS = (event) => {
   if (event.key === "Escape") {
@@ -89,21 +94,20 @@ const HANDLE_ESCAPE_KEY_PRESS = (event) => {
   }
 };
 
-
 const HANDLE_MENU_ITEM_KEY_PRESS = (event, MENU_ITEM_INDEX) => {
   const NEXT_MENU_ITEM_INDEX =
     event.key === "ArrowDown" || event.key === "ArrowRight"
-      ? MOD_NUMBER(MENU_ITEM_INDEX + 1, MENU_ITEMS.length)
+      ? MOD_NUMBER(MENU_ITEM_INDEX + 1, PROFILE_OPTIONS.length)
       : event.key === "ArrowUp" || event.key === "ArrowLeft"
-      ? MOD_NUMBER(MENU_ITEM_INDEX - 1, MENU_ITEMS.length)
+      ? MOD_NUMBER(MENU_ITEM_INDEX - 1, PROFILE_OPTIONS.length)
       : event.key === "Home"
       ? 0
       : event.key === "End"
-      ? MENU_ITEMS.length - 1
+      ? PROFILE_OPTIONS.length - 1
       : undefined;
 
   if (NEXT_MENU_ITEM_INDEX !== undefined) {
-    MENU_ITEMS.item(NEXT_MENU_ITEM_INDEX).focus();
+    PROFILE_OPTIONS.item(NEXT_MENU_ITEM_INDEX).focus();
   }
 };
 
@@ -180,15 +184,20 @@ const UPDATE_ARIA_FOR_TOGGLE_COMPLETE_BTN = (TOGGLE_BTN_INDEX) => {
 
 const TOGGLE_SETUP_STEP_COMPLETE = (TOGGLE_BTN_INDEX) => {
   const SETUP_STEP = SETUPGUIDE_STEPS[TOGGLE_BTN_INDEX];
-  const IS_SETUP_STEP_COMPLETE = !!SETUP_STEP.dataset.isCompleted;
-  SETUP_STEP.dataset.isCompleted = IS_SETUP_STEP_COMPLETE ? "" : true;
+  if (SETUP_STEP) {
+    const IS_SETUP_STEP_COMPLETE = !!SETUP_STEP.dataset.isCompleted;
+    SETUP_STEP.dataset.isCompleted = IS_SETUP_STEP_COMPLETE ? "" : true;
 
-  UPDATE_PROGRESS_BAR();
-  UPDATE_ARIA_FOR_TOGGLE_COMPLETE_BTN(TOGGLE_BTN_INDEX);
+    UPDATE_PROGRESS_BAR();
+    UPDATE_ARIA_FOR_TOGGLE_COMPLETE_BTN(TOGGLE_BTN_INDEX);
 
-  const NEXT_STEP_INDEX = FIND_NEXT_UNCOMPLETED_STEP_INDEX(SETUPGUIDE_STEPS);
-  if (NEXT_STEP_INDEX !== -1) {
-    SHOW_SETUP_STEP(NEXT_STEP_INDEX);
+    const NEXT_STEP_INDEX = FIND_NEXT_UNCOMPLETED_STEP_INDEX(SETUPGUIDE_STEPS);
+    if (NEXT_STEP_INDEX !== -1) {
+      SHOW_SETUP_STEP(NEXT_STEP_INDEX);
+    }
+  } else {
+    console.error("SETUP_STEP is undefined or null");
+    console.log(SETUPGUIDE_STEPS);
   }
 };
 
@@ -223,7 +232,7 @@ DROPDOWN.forEach((POPUP) => {
 });
 NOTIFICATIONS_BTN.addEventListener("keyup", HANDLE_ESCAPE_KEY_PRESS);
 
-MENU_ITEMS.forEach((MENU_ITEM, INDEX) =>
+PROFILE_OPTIONS.forEach((MENU_ITEM, INDEX) =>
   MENU_ITEM.addEventListener("keyup", (EVENT) =>
     HANDLE_MENU_ITEM_KEY_PRESS(EVENT, INDEX)
   )
@@ -242,5 +251,8 @@ SETUPGUIDE_STEP_VISIBILITY_TOGGLE_BTNS.forEach((BTN, BTN_INDEX) => {
 });
 
 SETUPGUIDE_STEPS_COMPLETE_BTNS.forEach((BTN, BTN_INDEX) => {
-  BTN.addEventListener("click", () => TOGGLE_SETUP_STEP_COMPLETE(BTN_INDEX));
+  BTN.addEventListener("click", () => {
+    console.log(BTN_INDEX);
+    TOGGLE_SETUP_STEP_COMPLETE(BTN_INDEX);
+  });
 });

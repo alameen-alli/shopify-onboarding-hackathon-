@@ -446,7 +446,7 @@ h6 {
   transition: width 500ms linear;
 }
 
-.setup {
+.setupguide-fz {
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
@@ -456,14 +456,14 @@ h6 {
   overflow: hidden;
 }
 
-.setup.hidden {
+.setupguide-fz.hidden {
   display: block;
   max-height: 0;
   margin: 0;
   visibility: hidden;
 }
 
-.setup-step {
+.setupguide-item {
   padding: 0.5rem;
   border-radius: 10px;
   position: relative;
@@ -500,75 +500,76 @@ h6 {
   opacity: 1;
 }
 
-.setup-step svg:nth-of-type(4) {
+.setupguide-item svg:nth-of-type(4) {
   transition: transform 300ms linear;
 }
 
-.setup-step[data-is-completed="true"] svg:nth-of-type(n) {
+.setupguide-item[data-is-completed="true"] svg:nth-of-type(n) {
   opacity: 0;
 }
 
-.setup-step[data-is-completed="true"] svg:nth-of-type(4) {
+.setupguide-item[data-is-completed="true"] svg:nth-of-type(4) {
   opacity: 1;
   transform: rotate(360deg);
 }
 
-.setup-step svg:nth-of-type(5) {
+.setupguide-item svg:nth-of-type(5) {
   transition-property: opacity, transform;
   transition-delay: 300ms, 300ms;
   transition-duration: 100ms, 100ms;
   transform: scale(0.5) rotate(-90deg);
 }
 
-.setup-step[data-is-completed="true"] svg:nth-of-type(5) {
+.setupguide-item[data-is-completed="true"] svg:nth-of-type(5) {
   opacity: 1;
   transform: scale(1) rotate(0deg);
 }
 
-.setup h3 {
-  font-weight: 500;
-}
 
-.setup-step.active h3 {
+.setupguide-item.active h3 {
   font-weight: 600;
 }
 
-.setup-step .content {
+.setupguide-item .content {
   margin-left: 2rem;
   max-width: 30.25rem;
   display: none;
 }
 
-.setup-step.active {
+.setupguide-item.active {
   background-color: #f3f3f3;
   padding-bottom: 0.75rem;
 }
 
-.setup-step.active .content {
+.setupguide-item.active .content {
   display: block;
 }
 
-.setup-step p {
+.setupguide-item p {
   margin: 0.75rem 0 1rem;
   color: #616161;
   font-weight: 500;
 }
 
-.setup-step a {
+.setupguide-item a {
   color: #005bd3;
   font-size: 0.875rem;
   font-weight: 500;
 }
 
-.setup img {
+.setupguide-fz img {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
 }
 
-.setup .profileBox {
+.setupguide-fz .profileBox {
   display: flex;
   gap: 16px;
+}
+
+.setupguide-fz h3 {
+  font-weight: 500;
 }
 
 
@@ -717,7 +718,7 @@ h6 {
     border-radius: 0;
   }
 
-  .setup img {
+  .setupguide-fz img {
     display: none;
   }
 }
