@@ -1,101 +1,92 @@
-const PROFILE_MENU_BTN = document.getElementById("profile-menu-button");
-const MENU = document.getElementById("menu");
-const PROFILE_OPTIONS = document.querySelectorAll('[role="profile-menu-option"]');
-const PROFILE_MENU_ARIA_NOTIFICATION = document.getElementById(
-  "profile-menu-notify"
-);
-const isHidden = "isHidden";
-const menuFirstItem = 1;
-const NOTIFICATIONS_BTN = document.getElementById("notification-btn");
-const NOTIFICATIONS_CONTAINER = document.getElementById("notifications");
-const ARIA_NOTIFICATIONS = document.getElementById("notificationDisplay");
-const DROPDOWN = [NOTIFICATIONS_CONTAINER, MENU];
-const DROPDOWN_BTNS = [NOTIFICATIONS_BTN, PROFILE_MENU_BTN];
-const NOTIFICATIONID = 0;
-const DROPDOWN_ARIA_NOTIFICATION = [
-  ARIA_NOTIFICATIONS,
-  PROFILE_MENU_ARIA_NOTIFICATION,
-];
-const TRIAL_CALLOUT = document.getElementById("select-a-plan-callout");
-const TRIAL_CALLOUT_CLOSE_BTN = document.getElementById(
-  "trial-callout-close-button"
-);
-const TRIAL_CALLOUT_ARIA_NOTIFICATION =
-  document.getElementById("trial-callout");
-const SETUPGUIDE_TOGGLE_CHECK = document.getElementById(
-  "setupguide-toggle-button"
-);
-const SETUP = document.getElementById("setupguide-section-id");
-const TOGGLE_SETUP_ARIA_NOTIFICATION = document.getElementById(
-  "toggle-setup-notify"
-);
-const SETUPGUIDE_PROGRESSBAR = document.getElementById(
-  "setupguide-progess-bar"
-);
-const PROGRESS_COUNT = document.getElementById("setupguide-progress-count");
-const SETUPGUIDE_STEP_VISIBILITY_TOGGLE_BTNS =
-  document.querySelectorAll(".toggle-check-buttons");
-const SETUPGUIDE_STEPS = [
-  ...document.querySelectorAll(".setupguide-item"),
-];
-const ACTIVE_CLASS = "active";
-const SETUPGUIDE_STEPS_ARIA_NOTIFICATIONS =
-  document.querySelectorAll(".notify-on-step-change");
-const SETUPGUIDE_STEPS_COMPLETE_BTNS =
-  document.querySelectorAll(".check-button");
-const TOGGLE_ARIA_NOTIFICATIONS_ON_COMPLETE = document.querySelectorAll(
-  ".notify-on-check-change"
-);
+// Profile Menu
+const profileMenuButton = document.getElementById("profile-menu-button");
+const menuContainer = document.getElementById("menu");
+const profileMenuOptions = document.querySelectorAll('[role="profile-menu-option"]');
+const profileMenuAriaNotification = document.getElementById("profile-menu-notify");
+const isHiddenClass = "isHidden";
+const firstMenuItemIndex = 1;
 
-const HIDE_DROPDOWN = () => {
-  DROPDOWN.forEach((popup, index) => {
-    const IS_DROPDOWN = !popup.classList.contains(isHidden);
-    if (!IS_DROPDOWN) {
+// Notifications
+const notificationsButton = document.getElementById("notification-btn");
+const notificationsContainer = document.getElementById("notifications");
+const notificationsDisplay = document.getElementById("notificationDisplay");
+const dropdownContainers = [notificationsContainer, menuContainer];
+const dropdownButtons = [notificationsButton, profileMenuButton];
+const defaultNotificationId = 0;
+const dropdownNotifications = [notificationsDisplay, profileMenuAriaNotification];
+
+// Trial Callout
+const trialCalloutElement = document.getElementById("select-a-plan-callout");
+const trialCalloutCloseButton = document.getElementById("trial-callout-close-button");
+const trialCalloutAriaNotification = document.getElementById("trial-callout");
+
+// Setup Guide
+const setupGuideToggleButton = document.getElementById("setupguide-toggle-button");
+const setupGuideSection = document.getElementById("setupguide-section-id");
+const toggleSetupAriaNotification = document.getElementById("toggle-setup-notify");
+const setupProgressBar = document.getElementById("setupguide-progess-bar");
+const progressCountElement = document.getElementById("setupguide-progress-count");
+const stepVisibilityToggleButtons = document.querySelectorAll(".toggle-check-buttons");
+const setupGuideSteps = [...document.querySelectorAll(".setupguide-item")];
+const activeStepClass = "active";
+const stepAriaNotifications = document.querySelectorAll(".notify-on-step-change");
+const stepsCompleteButtons = document.querySelectorAll(".check-button");
+const toggleNotificationsOnComplete = document.querySelectorAll(".notify-on-check-change");
+
+// Function to hide all dropdowns
+const hideDropdown = () => {
+  dropdownContainers.forEach((popup, index) => {
+    const isDropdownVisible = !popup.classList.contains(isHiddenClass);
+    if (!isDropdownVisible) {
       return;
     }
 
-    popup.classList.add(isHidden);
-    DROPDOWN_BTNS[index].setAttribute("aria-expanded", false);
-    const DROPDOWN_ARIA = DROPDOWN_ARIA_NOTIFICATION[index];
-    DROPDOWN_ARIA.setAttribute("aria-label", DROPDOWN_ARIA.dataset.closeLabel);
+    popup.classList.add(isHiddenClass);
+    dropdownButtons[index].setAttribute("aria-expanded", false);
+    const dropdownAria = dropdownNotifications[index];
+    dropdownAria.setAttribute("aria-label", dropdownAria.dataset.closeLabel);
   });
 };
 
-const TOGGLE_POPUP = (event, DROPDOWNID) => {
-  const POPUP = DROPDOWN[DROPDOWNID];
-  const POPUP_BTN = DROPDOWN_BTNS[DROPDOWNID];
-  const IS_DROPDOWN = !POPUP.classList.contains(isHidden);
+// Function to toggle a specific dropdown
+const togglePopup = (event, dropdownId) => {
+  const popup = dropdownContainers[dropdownId];
+  const popupButton = dropdownButtons[dropdownId];
+  const isDropdownVisible = !popup.classList.contains(isHiddenClass);
 
-  HIDE_DROPDOWN();
+  hideDropdown();
 
-  if (!IS_DROPDOWN) {
-    POPUP.classList.remove(isHidden);
-    POPUP_BTN.setAttribute("aria-expanded", true);
-    const DROPDOWN_ARIA = DROPDOWN_ARIA_NOTIFICATION[DROPDOWNID];
-    DROPDOWN_ARIA.setAttribute("aria-label", DROPDOWN_ARIA.dataset.openLabel);
+  if (!isDropdownVisible) {
+    popup.classList.remove(isHiddenClass);
+    popupButton.setAttribute("aria-expanded", true);
+    const dropdownAria = dropdownNotifications[dropdownId];
+    dropdownAria.setAttribute("aria-label", dropdownAria.dataset.openLabel);
     event.stopPropagation();
   }
 };
 
-const HIDE_DROPDOWN_ON_CLICK_OUTSIDE = (event) => {
-  const IS_ANY_POPUP_CLICKED = DROPDOWN.some((popup) =>
+// Function to hide dropdowns when clicking outside
+const hideDropdownOnClickOutside = (event) => {
+  const isAnyPopupClicked = dropdownContainers.some((popup) =>
     popup.contains(event.target)
   );
-  if (!IS_ANY_POPUP_CLICKED) {
-    HIDE_DROPDOWN();
+  if (!isAnyPopupClicked) {
+    hideDropdown();
   }
 };
 
-const FOCUS_FIRST_MENU_ITEM = () => PROFILE_OPTIONS.item(0).focus();
+// Function to focus on the first menu item
+const focusFirstMenuItem = () => profileMenuOptions.item(0).focus();
 
-const HANDLE_ESCAPE_KEY_PRESS = (event) => {
+// Function to handle the Escape key press
+const handleEscapeKeyPress = (event) => {
   if (event.key === "Escape") {
-    HIDE_DROPDOWN();
-    PROFILE_MENU_BTN.focus()
+    hideDropdown();
+    profileMenuButton.focus();
   }
 };
 
-
+// Function to handle key changes for menu items
 const setMenuItemOnKeyChange = (event, currentMenuItemIndex) => {
   const calculateNextIndex = (currentIndex, totalItems) => calculatePositiveRemainder(currentIndex, totalItems);
 
@@ -106,166 +97,170 @@ const setMenuItemOnKeyChange = (event, currentMenuItemIndex) => {
 
   const nextMenuItemIndex =
     isMoveDownOrRight
-      ? calculateNextIndex(currentMenuItemIndex + 1, PROFILE_OPTIONS.length)
+      ? calculateNextIndex(currentMenuItemIndex + 1, profileMenuOptions.length)
       : isMoveUpOrLeft
-      ? calculateNextIndex(currentMenuItemIndex - 1, PROFILE_OPTIONS.length)
+      ? calculateNextIndex(currentMenuItemIndex - 1, profileMenuOptions.length)
       : isHomeKey
       ? 0
       : isEndKey
-      ? PROFILE_OPTIONS.length - 1
+      ? profileMenuOptions.length - 1
       : undefined;
 
   if (nextMenuItemIndex !== undefined) {
-    const nextMenuItem = PROFILE_OPTIONS.item(nextMenuItemIndex);
+    const nextMenuItem = profileMenuOptions.item(nextMenuItemIndex);
     nextMenuItem.focus();
   }
 };
 
+// Function to calculate positive remainder
 const calculatePositiveRemainder = (number, divisor) => {
   const remainder = number % divisor;
   const positiveRemainder = (remainder + divisor) % divisor;
   return positiveRemainder;
 };
 
+// Function to toggle the setup guide visibility
+const toggleSetup = () => {
+  setupGuideSection.classList.toggle(isHiddenClass);
 
-const TOGGLE_SETUP = () => {
-  SETUP.classList.toggle(isHidden);
-
-  const IS_OPEN = !SETUP.classList.contains(isHidden);
-  TOGGLE_SETUP_ARIA_NOTIFICATION.setAttribute(
+  const isOpen = !setupGuideSection.classList.contains(isHiddenClass);
+  toggleSetupAriaNotification.setAttribute(
     "aria-label",
-    IS_OPEN ? "Setup opened" : "Setup closed"
+    isOpen ? "Setup opened" : "Setup closed"
   );
 
-  SETUPGUIDE_TOGGLE_CHECK.setAttribute("aria-expanded", IS_OPEN);
-  SETUPGUIDE_TOGGLE_CHECK.dataset.isOpen = IS_OPEN ? "" : true;
+  setupGuideToggleButton.setAttribute("aria-expanded", isOpen);
+  setupGuideToggleButton.dataset.isOpen = isOpen ? "" : true;
 };
 
-const SHOW_SETUP_STEP = (SETUP_STEP_INDEX) => {
-  HIDE_SETUPGUIDE_STEPS();
-  SETUPGUIDE_STEPS[SETUP_STEP_INDEX].classList.add(ACTIVE_CLASS);
+// Function to show a specific setup guide step
+const showSetupStep = (setupStepIndex) => {
+  hideSetupGuideSteps();
+  setupGuideSteps[setupStepIndex].classList.add(activeStepClass);
 
-  const SETUP_STEP_ARIA_NOTIFICATION =
-    SETUPGUIDE_STEPS_ARIA_NOTIFICATIONS.item(SETUP_STEP_INDEX);
-  SETUP_STEP_ARIA_NOTIFICATION.setAttribute(
+  const setupStepAriaNotification = stepAriaNotifications.item(setupStepIndex);
+  setupStepAriaNotification.setAttribute(
     "aria-label",
-    `Setup step ${SETUP_STEP_INDEX + 1} opened`
+    `Setup step ${setupStepIndex + 1} opened`
   );
 
-  SETUPGUIDE_STEP_VISIBILITY_TOGGLE_BTNS.item(SETUP_STEP_INDEX).setAttribute(
+  stepVisibilityToggleButtons.item(setupStepIndex).setAttribute(
     "aria-expanded",
     true
   );
 };
 
-const HIDE_SETUPGUIDE_STEPS = () => {
-  SETUPGUIDE_STEPS.forEach((el, INDEX) => {
-    const IS_CLOSED = !el.classList.contains(ACTIVE_CLASS);
-    if (IS_CLOSED) {
+// Function to hide all setup guide steps
+const hideSetupGuideSteps = () => {
+  setupGuideSteps.forEach((el, index) => {
+    const isClosed = !el.classList.contains(activeStepClass);
+    if (isClosed) {
       return;
     }
 
-    el.classList.remove(ACTIVE_CLASS);
-    SETUPGUIDE_STEPS_ARIA_NOTIFICATIONS.item(INDEX).setAttribute(
+    el.classList.remove(activeStepClass);
+    stepAriaNotifications.item(index).setAttribute(
       "aria-label",
-      `Setup step ${INDEX + 1} closed`
+      `Setup step ${index + 1} closed`
     );
   });
 
-  SETUPGUIDE_STEP_VISIBILITY_TOGGLE_BTNS.forEach((btn) =>
+  stepVisibilityToggleButtons.forEach((btn) =>
     btn.setAttribute("aria-expanded", false)
   );
 };
 
-const UPDATE_ARIA_FOR_TOGGLE_COMPLETE_BTN = (TOGGLE_BTN_INDEX) => {
-  const SETUP_STEP = SETUPGUIDE_STEPS[TOGGLE_BTN_INDEX];
-  const IS_SETUP_STEP_COMPLETE = !!SETUP_STEP.dataset.isCompleted;
-  const TOGGLE_BTN = SETUPGUIDE_STEPS_COMPLETE_BTNS[TOGGLE_BTN_INDEX];
-  const TOGGLE_COMPLETE_ARIA_NOTIFICATION =
-    TOGGLE_ARIA_NOTIFICATIONS_ON_COMPLETE.item(TOGGLE_BTN_INDEX);
+// Function to update ARIA attributes for toggle complete button
+const updateAriaForToggleCompleteBtn = (toggleBtnIndex) => {
+  const setupStep = setupGuideSteps[toggleBtnIndex];
+  const isSetupStepComplete = !!setupStep.dataset.isCompleted;
+  const toggleBtn = stepsCompleteButtons[toggleBtnIndex];
+  const toggleCompleteAriaNotification = toggleNotificationsOnComplete.item(toggleBtnIndex);
 
-  if (IS_SETUP_STEP_COMPLETE) {
-        // TOGGLE_BTN.setAttribute("aria-label", "Checked");
-    TOGGLE_COMPLETE_ARIA_NOTIFICATION.setAttribute(
+  if (isSetupStepComplete) {
+    toggleCompleteAriaNotification.setAttribute(
       "aria-label",
-      ` Step ${TOGGLE_BTN_INDEX + 1} checked`
+      ` Step ${toggleBtnIndex + 1} checked`
     );
   } else {
-    TOGGLE_COMPLETE_ARIA_NOTIFICATION.setAttribute(
+    toggleCompleteAriaNotification.setAttribute(
       "aria-label",
-      `Step ${TOGGLE_BTN_INDEX + 1} unchecked`
+      `Step ${toggleBtnIndex + 1} unchecked`
     );
-    // TOGGLE_BTN.setAttribute("aria-label", "Unchecked");
   }
 };
 
-const TOGGLE_SETUP_STEP_COMPLETE = (TOGGLE_BTN_INDEX) => {
-  const SETUP_STEP = SETUPGUIDE_STEPS[TOGGLE_BTN_INDEX];
-  if (SETUP_STEP) {
-    const IS_SETUP_STEP_COMPLETE = !!SETUP_STEP.dataset.isCompleted;
-    SETUP_STEP.dataset.isCompleted = IS_SETUP_STEP_COMPLETE ? "" : true;
+// Function to toggle the completion of a setup guide step
+const toggleSetupStepComplete = (toggleBtnIndex) => {
+  const setupStep = setupGuideSteps[toggleBtnIndex];
+  if (setupStep) {
+    const isSetupStepComplete = !!setupStep.dataset.isCompleted;
+    setupStep.dataset.isCompleted = isSetupStepComplete ? "" : true;
 
-    UPDATE_PROGRESS_BAR();
-    UPDATE_ARIA_FOR_TOGGLE_COMPLETE_BTN(TOGGLE_BTN_INDEX);
+    updateProgressBar();
+    updateAriaForToggleCompleteBtn(toggleBtnIndex);
 
-    const NEXT_STEP_INDEX = FIND_NEXT_UNCOMPLETED_STEP_INDEX(SETUPGUIDE_STEPS);
-    if (NEXT_STEP_INDEX !== -1) {
-      SHOW_SETUP_STEP(NEXT_STEP_INDEX);
+    const nextStepIndex = findNextUncompletedStepIndex(setupGuideSteps);
+    if (nextStepIndex !== -1) {
+      showSetupStep(nextStepIndex);
     }
   } else {
-    console.error("SETUP_STEP is undefined or null");
+    console.error("setupStep is undefined or null");
   }
 };
 
-const FIND_NEXT_UNCOMPLETED_STEP_INDEX = (SETUPGUIDE_STEPS) =>
-  SETUPGUIDE_STEPS.findIndex((STEP) => !STEP.dataset.isCompleted);
+// Function to find the index of the next uncompleted setup guide step
+const findNextUncompletedStepIndex = (setupGuideSteps) =>
+  setupGuideSteps.findIndex((step) => !step.dataset.isCompleted);
 
-const UPDATE_PROGRESS_BAR = () => {
-  const COMPLETED_STEPS_NO = SETUPGUIDE_STEPS.filter(
-    (STEP) => STEP.dataset.isCompleted
+// Function to update the progress bar based on completed steps
+const updateProgressBar = () => {
+  const completedStepsNo = setupGuideSteps.filter(
+    (step) => step.dataset.isCompleted
   ).length;
-  SETUPGUIDE_PROGRESSBAR.style.width = `${COMPLETED_STEPS_NO * 20}%`;
-  PROGRESS_COUNT.innerText = COMPLETED_STEPS_NO;
+  setupProgressBar.style.width = `${completedStepsNo * 20}%`;
+  progressCountElement.innerText = completedStepsNo;
 };
 
-NOTIFICATIONS_BTN.addEventListener("click", (e) => {
-  TOGGLE_POPUP(e, NOTIFICATIONID);
+// Event listeners
+notificationsButton.addEventListener("click", (e) => {
+  togglePopup(e, defaultNotificationId);
 });
 
-PROFILE_MENU_BTN.addEventListener("click", (e) => {
-  TOGGLE_POPUP(e, menuFirstItem);
+profileMenuButton.addEventListener("click", (e) => {
+  togglePopup(e, firstMenuItemIndex);
 
-  const IS_MENU_OPEN = !MENU.classList.contains(isHidden);
-  if (IS_MENU_OPEN) {
-    FOCUS_FIRST_MENU_ITEM();
+  const isMenuOpen = !menuContainer.classList.contains(isHiddenClass);
+  if (isMenuOpen) {
+    focusFirstMenuItem();
   }
 });
 
-DROPDOWN.forEach((isNotHidden) => {
-  isNotHidden.addEventListener("keyup", HANDLE_ESCAPE_KEY_PRESS);
+dropdownContainers.forEach((isVisible) => {
+  isVisible.addEventListener("keyup", handleEscapeKeyPress);
 });
-NOTIFICATIONS_BTN.addEventListener("keyup", HANDLE_ESCAPE_KEY_PRESS);
+notificationsButton.addEventListener("keyup", handleEscapeKeyPress);
 
-PROFILE_OPTIONS.forEach((profileListItem, index) =>
+profileMenuOptions.forEach((profileListItem, index) =>
   profileListItem.addEventListener("keyup", (e) =>
-  setMenuItemOnKeyChange(e, index)
+    setMenuItemOnKeyChange(e, index)
   )
 );
 
-document.addEventListener("click", HIDE_DROPDOWN_ON_CLICK_OUTSIDE);
+document.addEventListener("click", hideDropdownOnClickOutside);
 
-TRIAL_CALLOUT_CLOSE_BTN.addEventListener("click", () => {
-  TRIAL_CALLOUT.classList.add(isHidden);
-  TRIAL_CALLOUT_ARIA_NOTIFICATION.setAttribute("aria-label", "Trial Callout Hidden");
+trialCalloutCloseButton.addEventListener("click", () => {
+  trialCalloutElement.classList.add(isHiddenClass);
+  trialCalloutAriaNotification.setAttribute("aria-label", "Trial Callout Hidden");
 });
 
-SETUPGUIDE_TOGGLE_CHECK.addEventListener("click", TOGGLE_SETUP);
-SETUPGUIDE_STEP_VISIBILITY_TOGGLE_BTNS.forEach((checkButton, index) => {
-  checkButton.addEventListener("click", () => SHOW_SETUP_STEP(index));
+setupGuideToggleButton.addEventListener("click", toggleSetup);
+stepVisibilityToggleButtons.forEach((checkButton, index) => {
+  checkButton.addEventListener("click", () => showSetupStep(index));
 });
 
-SETUPGUIDE_STEPS_COMPLETE_BTNS.forEach((checkButton, index) => {
+stepsCompleteButtons.forEach((checkButton, index) => {
   checkButton.addEventListener("click", () => {
-    TOGGLE_SETUP_STEP_COMPLETE(index);
+    toggleSetupStepComplete(index);
   });
 });
