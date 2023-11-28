@@ -246,8 +246,8 @@ TRIAL_CALLOUT_CLOSE_BTN.addEventListener("click", () => {
 });
 
 SETUPGUIDE_TOGGLE_CHECK.addEventListener("click", TOGGLE_SETUP);
-SETUPGUIDE_STEP_VISIBILITY_TOGGLE_BTNS.forEach((BTN, BTN_INDEX) => {
-  BTN.addEventListener("click", () => SHOW_SETUP_STEP(BTN_INDEX));
+SETUPGUIDE_STEP_VISIBILITY_TOGGLE_BTNS.forEach((checkButton, BTN_INDEX) => {
+  checkButton.addEventListener("click", () => SHOW_SETUP_STEP(BTN_INDEX));
 });
 
 SETUPGUIDE_STEPS_COMPLETE_BTNS.forEach((checkButton, index) => {
