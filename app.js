@@ -50,15 +50,15 @@ const hideDropdown = () => {
 
 // Function to show a specific dropdown
 const showDropdown = (event, dropdownId) => {
-  const popup = dropdownContainers[dropdownId];
-  const popupButton = dropdownButtons[dropdownId];
+  const dropDown = dropdownContainers[dropdownId];
+  const dropdownType = dropdownButtons[dropdownId];
   const isDropdownVisible = !popup.classList.contains(isHiddenClass);
 
   hideDropdown();
 
   if (!isDropdownVisible) {
-    popup.classList.remove(isHiddenClass);
-    popupButton.setAttribute("aria-expanded", true);
+    dropDown.classList.remove(isHiddenClass);
+    dropdownType.setAttribute("aria-expanded", true);
     const dropdownAria = dropdownNotifications[dropdownId];
     dropdownAria.setAttribute("aria-label", dropdownAria.dataset.openLabel);
     event.stopPropagation();
