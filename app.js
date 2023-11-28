@@ -35,21 +35,21 @@ const toggleNotificationsOnComplete = document.querySelectorAll(".notify-on-chec
 
 // Function to hide all dropdowns
 const hideDropdown = () => {
-  dropdownContainers.forEach((popup, index) => {
-    const isDropdownVisible = !popup.classList.contains(isHiddenClass);
+  dropdownContainers.forEach((dropDown, index) => {
+    const isDropdownVisible = !dropDown.classList.contains(isHiddenClass);
     if (!isDropdownVisible) {
       return;
     }
 
-    popup.classList.add(isHiddenClass);
+    dropDown.classList.add(isHiddenClass);
     dropdownButtons[index].setAttribute("aria-expanded", false);
     const dropdownAria = dropdownNotifications[index];
     dropdownAria.setAttribute("aria-label", dropdownAria.dataset.closeLabel);
   });
 };
 
-// Function to toggle a specific dropdown
-const togglePopup = (event, dropdownId) => {
+// Function to show a specific dropdown
+const showDropdown = (event, dropdownId) => {
   const popup = dropdownContainers[dropdownId];
   const popupButton = dropdownButtons[dropdownId];
   const isDropdownVisible = !popup.classList.contains(isHiddenClass);
@@ -224,11 +224,11 @@ const updateProgressBar = () => {
 
 // Event listeners
 notificationsButton.addEventListener("click", (e) => {
-  togglePopup(e, defaultNotificationId);
+  showDropdown(e, defaultNotificationId);
 });
 
 profileMenuButton.addEventListener("click", (e) => {
-  togglePopup(e, firstMenuItemIndex);
+  showDropdown(e, firstMenuItemIndex);
 
   const isMenuOpen = !menuContainer.classList.contains(isHiddenClass);
   if (isMenuOpen) {
