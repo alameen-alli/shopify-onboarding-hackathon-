@@ -95,22 +95,38 @@ const HANDLE_ESCAPE_KEY_PRESS = (event) => {
   }
 };
 
-const HANDLE_MENU_ITEM_KEY_PRESS = (event, MENU_ITEM_INDEX) => {
-  const NEXT_MENU_ITEM_INDEX =
-    event.key === "ArrowDown" || event.key === "ArrowRight"
-      ? MOD_NUMBER(MENU_ITEM_INDEX + 1, PROFILE_OPTIONS.length)
-      : event.key === "ArrowUp" || event.key === "ArrowLeft"
-      ? MOD_NUMBER(MENU_ITEM_INDEX - 1, PROFILE_OPTIONS.length)
-      : event.key === "Home"
+
+const setMenuItemOnKeyChange = (event, currentMenuItemIndex) => {
+  const calculateNextIndex = (currentIndex, totalItems) => calculatePositiveRemainder(currentIndex, totalItems);
+
+  const isMoveDownOrRight = event.key === "ArrowDown" || event.key === "ArrowRight";
+  const isMoveUpOrLeft = event.key === "ArrowUp" || event.key === "ArrowLeft";
+  const isHomeKey = event.key === "Home";
+  const isEndKey = event.key === "End";
+
+  const nextMenuItemIndex =
+    isMoveDownOrRight
+      ? calculateNextIndex(currentMenuItemIndex + 1, PROFILE_OPTIONS.length)
+      : isMoveUpOrLeft
+      ? calculateNextIndex(currentMenuItemIndex - 1, PROFILE_OPTIONS.length)
+      : isHomeKey
       ? 0
-      : event.key === "End"
+      : isEndKey
       ? PROFILE_OPTIONS.length - 1
       : undefined;
 
-  if (NEXT_MENU_ITEM_INDEX !== undefined) {
-    PROFILE_OPTIONS.item(NEXT_MENU_ITEM_INDEX).focus();
+  if (nextMenuItemIndex !== undefined) {
+    const nextMenuItem = PROFILE_OPTIONS.item(nextMenuItemIndex);
+    nextMenuItem.focus();
   }
 };
+
+const calculatePositiveRemainder = (number, divisor) => {
+  const remainder = number % divisor;
+  const positiveRemainder = (remainder + divisor) % divisor;
+  return positiveRemainder;
+};
+
 
 const TOGGLE_SETUP = () => {
   SETUP.classList.toggle(isHidden);
@@ -212,10 +228,8 @@ const UPDATE_PROGRESS_BAR = () => {
   PROGRESS_COUNT.innerText = COMPLETED_STEPS_NO;
 };
 
-const MOD_NUMBER = (NUM, N) => ((NUM % N) + N) % N;
-
-NOTIFICATIONS_BTN.addEventListener("click", (EVENT) => {
-  TOGGLE_POPUP(EVENT, NOTIFICATIONID);
+NOTIFICATIONS_BTN.addEventListener("click", (e) => {
+  TOGGLE_POPUP(e, NOTIFICATIONID);
 });
 
 PROFILE_MENU_BTN.addEventListener("click", (e) => {
@@ -234,7 +248,7 @@ NOTIFICATIONS_BTN.addEventListener("keyup", HANDLE_ESCAPE_KEY_PRESS);
 
 PROFILE_OPTIONS.forEach((profileListItem, index) =>
   profileListItem.addEventListener("keyup", (e) =>
-    HANDLE_MENU_ITEM_KEY_PRESS(e, index)
+  setMenuItemOnKeyChange(e, index)
   )
 );
 
