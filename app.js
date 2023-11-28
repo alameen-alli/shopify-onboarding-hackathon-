@@ -218,8 +218,8 @@ NOTIFICATIONS_BTN.addEventListener("click", (EVENT) => {
   TOGGLE_POPUP(EVENT, NOTIFICATIONID);
 });
 
-PROFILE_MENU_BTN.addEventListener("click", (EVENT) => {
-  TOGGLE_POPUP(EVENT, menuFirstItem);
+PROFILE_MENU_BTN.addEventListener("click", (e) => {
+  TOGGLE_POPUP(e, menuFirstItem);
 
   const IS_MENU_OPEN = !MENU.classList.contains(isHidden);
   if (IS_MENU_OPEN) {
@@ -227,14 +227,14 @@ PROFILE_MENU_BTN.addEventListener("click", (EVENT) => {
   }
 });
 
-DROPDOWN.forEach((POPUP) => {
-  POPUP.addEventListener("keyup", HANDLE_ESCAPE_KEY_PRESS);
+DROPDOWN.forEach((isNotHidden) => {
+  isNotHidden.addEventListener("keyup", HANDLE_ESCAPE_KEY_PRESS);
 });
 NOTIFICATIONS_BTN.addEventListener("keyup", HANDLE_ESCAPE_KEY_PRESS);
 
-PROFILE_OPTIONS.forEach((MENU_ITEM, INDEX) =>
-  MENU_ITEM.addEventListener("keyup", (EVENT) =>
-    HANDLE_MENU_ITEM_KEY_PRESS(EVENT, INDEX)
+PROFILE_OPTIONS.forEach((profileListItem, index) =>
+  profileListItem.addEventListener("keyup", (e) =>
+    HANDLE_MENU_ITEM_KEY_PRESS(e, index)
   )
 );
 
@@ -242,12 +242,12 @@ document.addEventListener("click", HIDE_DROPDOWN_ON_CLICK_OUTSIDE);
 
 TRIAL_CALLOUT_CLOSE_BTN.addEventListener("click", () => {
   TRIAL_CALLOUT.classList.add(isHidden);
-  TRIAL_CALLOUT_ARIA_NOTIFICATION.setAttribute("aria-label", "Callout removed");
+  TRIAL_CALLOUT_ARIA_NOTIFICATION.setAttribute("aria-label", "Trial Callout Hidden");
 });
 
 SETUPGUIDE_TOGGLE_CHECK.addEventListener("click", TOGGLE_SETUP);
-SETUPGUIDE_STEP_VISIBILITY_TOGGLE_BTNS.forEach((checkButton, BTN_INDEX) => {
-  checkButton.addEventListener("click", () => SHOW_SETUP_STEP(BTN_INDEX));
+SETUPGUIDE_STEP_VISIBILITY_TOGGLE_BTNS.forEach((checkButton, index) => {
+  checkButton.addEventListener("click", () => SHOW_SETUP_STEP(index));
 });
 
 SETUPGUIDE_STEPS_COMPLETE_BTNS.forEach((checkButton, index) => {
