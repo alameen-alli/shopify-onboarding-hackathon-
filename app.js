@@ -4,7 +4,7 @@ const PROFILE_OPTIONS = document.querySelectorAll('[role="profile-menu-option"]'
 const PROFILE_MENU_ARIA_NOTIFICATION = document.getElementById(
   "profile-menu-notify"
 );
-const HIDDENSTYLE = "hidden";
+const isHidden = "isHidden";
 const MENUID = 1;
 const NOTIFICATIONS_BTN = document.getElementById("notification-btn");
 const NOTIFICATIONS_CONTAINER = document.getElementById("notifications");
@@ -49,12 +49,12 @@ const TOGGLE_ARIA_NOTIFICATIONS_ON_COMPLETE = document.querySelectorAll(
 
 const HIDE_DROPDOWN = () => {
   DROPDOWN.forEach((popup, index) => {
-    const IS_DROPDOWN = !popup.classList.contains(HIDDENSTYLE);
+    const IS_DROPDOWN = !popup.classList.contains(isHidden);
     if (!IS_DROPDOWN) {
       return;
     }
 
-    popup.classList.add(HIDDENSTYLE);
+    popup.classList.add(isHidden);
     DROPDOWN_BTNS[index].setAttribute("aria-expanded", false);
     const DROPDOWN_ARIA = DROPDOWN_ARIA_NOTIFICATION[index];
     DROPDOWN_ARIA.setAttribute("aria-label", DROPDOWN_ARIA.dataset.closeLabel);
@@ -64,12 +64,12 @@ const HIDE_DROPDOWN = () => {
 const TOGGLE_POPUP = (event, DROPDOWNID) => {
   const POPUP = DROPDOWN[DROPDOWNID];
   const POPUP_BTN = DROPDOWN_BTNS[DROPDOWNID];
-  const IS_DROPDOWN = !POPUP.classList.contains(HIDDENSTYLE);
+  const IS_DROPDOWN = !POPUP.classList.contains(isHidden);
 
   HIDE_DROPDOWN();
 
   if (!IS_DROPDOWN) {
-    POPUP.classList.remove(HIDDENSTYLE);
+    POPUP.classList.remove(isHidden);
     POPUP_BTN.setAttribute("aria-expanded", true);
     const DROPDOWN_ARIA = DROPDOWN_ARIA_NOTIFICATION[DROPDOWNID];
     DROPDOWN_ARIA.setAttribute("aria-label", DROPDOWN_ARIA.dataset.openLabel);
@@ -113,9 +113,9 @@ const HANDLE_MENU_ITEM_KEY_PRESS = (event, MENU_ITEM_INDEX) => {
 };
 
 const TOGGLE_SETUP = () => {
-  SETUP.classList.toggle(HIDDENSTYLE);
+  SETUP.classList.toggle(isHidden);
 
-  const IS_OPEN = !SETUP.classList.contains(HIDDENSTYLE);
+  const IS_OPEN = !SETUP.classList.contains(isHidden);
   TOGGLE_SETUP_ARIA_NOTIFICATION.setAttribute(
     "aria-label",
     IS_OPEN ? "Setup opened" : "Setup closed"
@@ -221,7 +221,7 @@ NOTIFICATIONS_BTN.addEventListener("click", (EVENT) => {
 PROFILE_MENU_BTN.addEventListener("click", (EVENT) => {
   TOGGLE_POPUP(EVENT, MENUID);
 
-  const IS_MENU_OPEN = !MENU.classList.contains(HIDDENSTYLE);
+  const IS_MENU_OPEN = !MENU.classList.contains(isHidden);
   if (IS_MENU_OPEN) {
     FOCUS_FIRST_MENU_ITEM();
   }
@@ -241,7 +241,7 @@ PROFILE_OPTIONS.forEach((MENU_ITEM, INDEX) =>
 document.addEventListener("click", HIDE_DROPDOWN_ON_CLICK_OUTSIDE);
 
 TRIAL_CALLOUT_CLOSE_BTN.addEventListener("click", () => {
-  TRIAL_CALLOUT.classList.add(HIDDENSTYLE);
+  TRIAL_CALLOUT.classList.add(isHidden);
   TRIAL_CALLOUT_ARIA_NOTIFICATION.setAttribute("aria-label", "Callout removed");
 });
 
