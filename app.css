@@ -280,7 +280,7 @@ h6 {
   color: #616161;
   font-weight: 600;
   background-color: #f1f1f1;
-  font-size: 13px;
+  font-size: 12.9px;
 }
 
 .menu {
@@ -377,7 +377,10 @@ h6 {
 }
 
 .trial-callout .close-btn {
-  padding: 8px;
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 6px;
   flex-shrink: 0;
   transition: all 250ms ease-in;

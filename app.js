@@ -1,10 +1,19 @@
 // Profile Menu
 const profileMenuButton = document.getElementById("profile-menu-button");
 const menuContainer = document.getElementById("menu");
-const profileMenuOptions = document.querySelectorAll('[role="profile-menu-option"]');
-const profileMenuAriaNotification = document.getElementById("profile-menu-notify");
+const profileMenuOptions = document.querySelectorAll(
+  '[role="profile-menu-option"]'
+);
+const profileMenuAriaNotification = document.getElementById(
+  "profile-menu-notify"
+);
 const isHiddenClass = "isHidden";
 const firstMenuItemIndex = 1;
+
+
+
+
+
 
 // Notifications
 const notificationsButton = document.getElementById("notification-btn");
@@ -13,25 +22,59 @@ const notificationsDisplay = document.getElementById("notificationDisplay");
 const dropdownContainers = [notificationsContainer, menuContainer];
 const dropdownButtons = [notificationsButton, profileMenuButton];
 const defaultNotificationId = 0;
-const dropdownNotifications = [notificationsDisplay, profileMenuAriaNotification];
+const dropdownNotifications = [
+  notificationsDisplay,
+  profileMenuAriaNotification,
+];
+
+
+
+
+
 
 // Trial Callout
 const trialCalloutElement = document.getElementById("select-a-plan-callout");
-const trialCalloutCloseButton = document.getElementById("trial-callout-close-button");
+const trialCalloutCloseButton = document.getElementById(
+  "trial-callout-close-button"
+);
 const trialCalloutAriaNotification = document.getElementById("trial-callout");
 
+
+
+
+
+
 // Setup Guide
-const setupGuideToggleButton = document.getElementById("setupguide-toggle-button");
+const setupGuideToggleButton = document.getElementById(
+  "setupguide-toggle-button"
+);
 const setupGuideSection = document.getElementById("setupguide-section-id");
-const toggleSetupAriaNotification = document.getElementById("toggle-setup-notify");
-const setupGuideProgressIndicator = document.getElementById("setupguide-progess-bar");
-const progressCountElement = document.getElementById("setupguide-progress-count");
-const stepVisibilityToggleButtons = document.querySelectorAll(".toggle-check-buttons");
+const toggleSetupAriaNotification = document.getElementById(
+  "toggle-setup-notify"
+);
+const setupGuideProgressIndicator = document.getElementById(
+  "setupguide-progess-bar"
+);
+const progressCountElement = document.getElementById(
+  "setupguide-progress-count"
+);
+const stepVisibilityToggleButtons = document.querySelectorAll(
+  ".toggle-check-buttons"
+);
 const setupGuideSteps = [...document.querySelectorAll(".setupguide-item")];
 const activeStepClass = "active";
-const stepAriaNotifications = document.querySelectorAll(".notify-on-step-change");
+const stepAriaNotifications = document.querySelectorAll(
+  ".notify-on-step-change"
+);
 const stepsCompleteButtons = document.querySelectorAll(".check-button");
-const toggleNotificationsOnComplete = document.querySelectorAll(".notify-on-check-change");
+const toggleNotificationsOnComplete = document.querySelectorAll(
+  ".notify-on-check-change"
+);
+
+
+
+
+
 
 // Function to hide all dropdowns
 const hideDropdown = () => {
@@ -47,6 +90,11 @@ const hideDropdown = () => {
     dropdownAria.setAttribute("aria-label", dropdownAria.dataset.closeLabel);
   });
 };
+
+
+
+
+
 
 // Function to show a specific dropdown
 const showDropdown = (event, dropdownId) => {
@@ -65,6 +113,11 @@ const showDropdown = (event, dropdownId) => {
   }
 };
 
+
+
+
+
+
 // Function to hide dropdowns when clicking outside
 const hideDropdownOnClickOutside = (event) => {
   const isAnyPopupClicked = dropdownContainers.some((popup) =>
@@ -74,6 +127,11 @@ const hideDropdownOnClickOutside = (event) => {
     hideDropdown();
   }
 };
+
+
+
+
+
 
 // Function to focus on the first menu item
 const focusFirstMenuItem = () => profileMenuOptions.item(0).focus();
@@ -86,25 +144,30 @@ const handleEscapeKeyPress = (event) => {
   }
 };
 
+
+
+
+
 // Function to handle key changes for menu items
 const setMenuItemOnKeyChange = (event, currentMenuItemIndex) => {
-  const calculateNextIndex = (currentIndex, totalItems) => calculatePositiveRemainder(currentIndex, totalItems);
+  const calculateNextIndex = (currentIndex, totalItems) =>
+    calculatePositiveRemainder(currentIndex, totalItems);
 
-  const isMoveDownOrRight = event.key === "ArrowDown" || event.key === "ArrowRight";
+  const isMoveDownOrRight =
+    event.key === "ArrowDown" || event.key === "ArrowRight";
   const isMoveUpOrLeft = event.key === "ArrowUp" || event.key === "ArrowLeft";
   const isHomeKey = event.key === "Home";
   const isEndKey = event.key === "End";
 
-  const nextMenuItemIndex =
-    isMoveDownOrRight
-      ? calculateNextIndex(currentMenuItemIndex + 1, profileMenuOptions.length)
-      : isMoveUpOrLeft
-      ? calculateNextIndex(currentMenuItemIndex - 1, profileMenuOptions.length)
-      : isHomeKey
-      ? 0
-      : isEndKey
-      ? profileMenuOptions.length - 1
-      : undefined;
+  const nextMenuItemIndex = isMoveDownOrRight
+    ? calculateNextIndex(currentMenuItemIndex + 1, profileMenuOptions.length)
+    : isMoveUpOrLeft
+    ? calculateNextIndex(currentMenuItemIndex - 1, profileMenuOptions.length)
+    : isHomeKey
+    ? 0
+    : isEndKey
+    ? profileMenuOptions.length - 1
+    : undefined;
 
   if (nextMenuItemIndex !== undefined) {
     const nextMenuItem = profileMenuOptions.item(nextMenuItemIndex);
@@ -112,12 +175,22 @@ const setMenuItemOnKeyChange = (event, currentMenuItemIndex) => {
   }
 };
 
+
+
+
+
+
 // Function to calculate positive remainder
 const calculatePositiveRemainder = (number, divisor) => {
   const remainder = number % divisor;
   const positiveRemainder = (remainder + divisor) % divisor;
   return positiveRemainder;
 };
+
+
+
+
+
 
 // Function to toggle the setup guide visibility
 const toggleSetup = () => {
@@ -133,6 +206,11 @@ const toggleSetup = () => {
   setupGuideToggleButton.dataset.isOpen = isOpen ? "" : true;
 };
 
+
+
+
+
+
 // Function to show a specific setup guide step
 const showSetupStep = (setupStepIndex) => {
   hideSetupGuideSteps();
@@ -144,11 +222,15 @@ const showSetupStep = (setupStepIndex) => {
     `Setup step ${setupStepIndex + 1} opened`
   );
 
-  stepVisibilityToggleButtons.item(setupStepIndex).setAttribute(
-    "aria-expanded",
-    true
-  );
+  stepVisibilityToggleButtons
+    .item(setupStepIndex)
+    .setAttribute("aria-expanded", true);
 };
+
+
+
+
+
 
 // Function to hide all setup guide steps
 const hideSetupGuideSteps = () => {
@@ -159,10 +241,9 @@ const hideSetupGuideSteps = () => {
     }
 
     el.classList.remove(activeStepClass);
-    stepAriaNotifications.item(index).setAttribute(
-      "aria-label",
-      `Setup step ${index + 1} closed`
-    );
+    stepAriaNotifications
+      .item(index)
+      .setAttribute("aria-label", `Setup step ${index + 1} closed`);
   });
 
   stepVisibilityToggleButtons.forEach((btn) =>
@@ -170,11 +251,17 @@ const hideSetupGuideSteps = () => {
   );
 };
 
+
+
+
+
+
 // Function to update ARIA attributes for toggle complete button
 const updateAriaForToggleCompleteBtn = (index) => {
   const setupStep = setupGuideSteps[index];
   const isAllStepsChecked = !!setupStep.dataset.isCompleted;
-  const toggleCompleteAriaNotification = toggleNotificationsOnComplete.item(index);
+  const toggleCompleteAriaNotification =
+    toggleNotificationsOnComplete.item(index);
 
   if (isAllStepsChecked) {
     toggleCompleteAriaNotification.setAttribute(
@@ -189,12 +276,19 @@ const updateAriaForToggleCompleteBtn = (index) => {
   }
 };
 
+
+
+
+
+
+
 // Function to toggle the completion of a setup guide step
-const toggleSetupStepComplete = (toggleBtnIndex) => {
-  const setupStep = setupGuideSteps[toggleBtnIndex];
-  if (setupStep) {
-    const isAllStepsChecked = !!setupStep.dataset.isCompleted;
-    setupStep.dataset.isCompleted = isAllStepsChecked ? "" : true;
+const setUpGuideCheck = (toggleBtnIndex) => {
+  const setupGuideCheckToggle = setupGuideSteps[toggleBtnIndex];
+  if (setupGuideCheckToggle) {
+    const isAllStepsChecked = !!setupGuideCheckToggle.dataset.isCompleted;
+    setupGuideCheckToggle.dataset.isCompleted = isAllStepsChecked ? "" : true;
+
 
     updateProgressBar();
     updateAriaForToggleCompleteBtn(toggleBtnIndex);
@@ -208,9 +302,20 @@ const toggleSetupStepComplete = (toggleBtnIndex) => {
   }
 };
 
+
+
+
+
+
+
 // Function to find the index of the next uncompleted setup guide step
 const moveToNotChecked = (setupGuideSteps) =>
   setupGuideSteps.findIndex((step) => !step.dataset.isCompleted);
+
+
+
+
+
 
 // Function to update the progress bar based on completed steps
 const updateProgressBar = () => {
@@ -220,6 +325,11 @@ const updateProgressBar = () => {
   setupGuideProgressIndicator.style.width = `${checkedSteps * 20}%`;
   progressCountElement.innerText = checkedSteps;
 };
+
+
+
+
+
 
 // Event listeners
 notificationsButton.addEventListener("click", (e) => {
@@ -235,6 +345,11 @@ profileMenuButton.addEventListener("click", (e) => {
   }
 });
 
+
+
+
+
+
 dropdownContainers.forEach((isVisible) => {
   isVisible.addEventListener("keyup", handleEscapeKeyPress);
 });
@@ -246,11 +361,19 @@ profileMenuOptions.forEach((profileListItem, index) =>
   )
 );
 
+
+
+
+
+
 document.addEventListener("click", hideDropdownOnClickOutside);
 
 trialCalloutCloseButton.addEventListener("click", () => {
   trialCalloutElement.classList.add(isHiddenClass);
-  trialCalloutAriaNotification.setAttribute("aria-label", "Trial Callout Hidden");
+  trialCalloutAriaNotification.setAttribute(
+    "aria-label",
+    "Trial Callout Hidden"
+  );
 });
 
 setupGuideToggleButton.addEventListener("click", toggleSetup);
@@ -260,6 +383,6 @@ stepVisibilityToggleButtons.forEach((checkButton, index) => {
 
 stepsCompleteButtons.forEach((checkButton, index) => {
   checkButton.addEventListener("click", () => {
-    toggleSetupStepComplete(index);
+    setUpGuideCheck(index);
   });
 });
