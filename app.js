@@ -5,10 +5,10 @@ const PROFILE_MENU_ARIA_NOTIFICATION = document.getElementById(
   "profile-menu-notify"
 );
 const isHidden = "isHidden";
-const MENUID = 1;
+const menuFirstItem = 1;
 const NOTIFICATIONS_BTN = document.getElementById("notification-btn");
 const NOTIFICATIONS_CONTAINER = document.getElementById("notifications");
-const ARIA_NOTIFICATIONS = document.getElementById("alerts-notify");
+const ARIA_NOTIFICATIONS = document.getElementById("notificationDisplay");
 const DROPDOWN = [NOTIFICATIONS_CONTAINER, MENU];
 const DROPDOWN_BTNS = [NOTIFICATIONS_BTN, PROFILE_MENU_BTN];
 const NOTIFICATIONID = 0;
@@ -219,7 +219,7 @@ NOTIFICATIONS_BTN.addEventListener("click", (EVENT) => {
 });
 
 PROFILE_MENU_BTN.addEventListener("click", (EVENT) => {
-  TOGGLE_POPUP(EVENT, MENUID);
+  TOGGLE_POPUP(EVENT, menuFirstItem);
 
   const IS_MENU_OPEN = !MENU.classList.contains(isHidden);
   if (IS_MENU_OPEN) {
@@ -250,8 +250,8 @@ SETUPGUIDE_STEP_VISIBILITY_TOGGLE_BTNS.forEach((BTN, BTN_INDEX) => {
   BTN.addEventListener("click", () => SHOW_SETUP_STEP(BTN_INDEX));
 });
 
-SETUPGUIDE_STEPS_COMPLETE_BTNS.forEach((BTN, BTN_INDEX) => {
-  BTN.addEventListener("click", () => {
-    TOGGLE_SETUP_STEP_COMPLETE(BTN_INDEX);
+SETUPGUIDE_STEPS_COMPLETE_BTNS.forEach((checkButton, index) => {
+  checkButton.addEventListener("click", () => {
+    TOGGLE_SETUP_STEP_COMPLETE(index);
   });
 });
