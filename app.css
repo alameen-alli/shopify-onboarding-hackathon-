@@ -494,11 +494,6 @@ h6 {
   position: relative;
 }
 
-.check-button:focus {
-  outline: 2px #005bd3 solid;
-  outline-offset: 1px;
-}
-
 .check-button svg {
   opacity: 0;
   position: absolute;

@@ -24,7 +24,7 @@ const trialCalloutAriaNotification = document.getElementById("trial-callout");
 const setupGuideToggleButton = document.getElementById("setupguide-toggle-button");
 const setupGuideSection = document.getElementById("setupguide-section-id");
 const toggleSetupAriaNotification = document.getElementById("toggle-setup-notify");
-const setupProgressBar = document.getElementById("setupguide-progess-bar");
+const setupGuideProgressIndicator = document.getElementById("setupguide-progess-bar");
 const progressCountElement = document.getElementById("setupguide-progress-count");
 const stepVisibilityToggleButtons = document.querySelectorAll(".toggle-check-buttons");
 const setupGuideSteps = [...document.querySelectorAll(".setupguide-item")];
@@ -50,15 +50,15 @@ const hideDropdown = () => {
 
 // Function to show a specific dropdown
 const showDropdown = (event, dropdownId) => {
-  const dropDown = dropdownContainers[dropdownId];
-  const dropdownType = dropdownButtons[dropdownId];
+  const popup = dropdownContainers[dropdownId];
+  const popupButton = dropdownButtons[dropdownId];
   const isDropdownVisible = !popup.classList.contains(isHiddenClass);
 
   hideDropdown();
 
   if (!isDropdownVisible) {
-    dropDown.classList.remove(isHiddenClass);
-    dropdownType.setAttribute("aria-expanded", true);
+    popup.classList.remove(isHiddenClass);
+    popupButton.setAttribute("aria-expanded", true);
     const dropdownAria = dropdownNotifications[dropdownId];
     dropdownAria.setAttribute("aria-label", dropdownAria.dataset.openLabel);
     event.stopPropagation();
@@ -171,21 +171,20 @@ const hideSetupGuideSteps = () => {
 };
 
 // Function to update ARIA attributes for toggle complete button
-const updateAriaForToggleCompleteBtn = (toggleBtnIndex) => {
-  const setupStep = setupGuideSteps[toggleBtnIndex];
-  const isSetupStepComplete = !!setupStep.dataset.isCompleted;
-  const toggleBtn = stepsCompleteButtons[toggleBtnIndex];
-  const toggleCompleteAriaNotification = toggleNotificationsOnComplete.item(toggleBtnIndex);
+const updateAriaForToggleCompleteBtn = (index) => {
+  const setupStep = setupGuideSteps[index];
+  const isAllStepsChecked = !!setupStep.dataset.isCompleted;
+  const toggleCompleteAriaNotification = toggleNotificationsOnComplete.item(index);
 
-  if (isSetupStepComplete) {
+  if (isAllStepsChecked) {
     toggleCompleteAriaNotification.setAttribute(
       "aria-label",
-      ` Step ${toggleBtnIndex + 1} checked`
+      ` Step ${index + 1} checked`
     );
   } else {
     toggleCompleteAriaNotification.setAttribute(
       "aria-label",
-      `Step ${toggleBtnIndex + 1} unchecked`
+      `Step ${index + 1} unchecked`
     );
   }
 };
@@ -194,13 +193,13 @@ const updateAriaForToggleCompleteBtn = (toggleBtnIndex) => {
 const toggleSetupStepComplete = (toggleBtnIndex) => {
   const setupStep = setupGuideSteps[toggleBtnIndex];
   if (setupStep) {
-    const isSetupStepComplete = !!setupStep.dataset.isCompleted;
-    setupStep.dataset.isCompleted = isSetupStepComplete ? "" : true;
+    const isAllStepsChecked = !!setupStep.dataset.isCompleted;
+    setupStep.dataset.isCompleted = isAllStepsChecked ? "" : true;
 
     updateProgressBar();
     updateAriaForToggleCompleteBtn(toggleBtnIndex);
 
-    const nextStepIndex = findNextUncompletedStepIndex(setupGuideSteps);
+    const nextStepIndex = moveToNotChecked(setupGuideSteps);
     if (nextStepIndex !== -1) {
       showSetupStep(nextStepIndex);
     }
@@ -210,16 +209,16 @@ const toggleSetupStepComplete = (toggleBtnIndex) => {
 };
 
 // Function to find the index of the next uncompleted setup guide step
-const findNextUncompletedStepIndex = (setupGuideSteps) =>
+const moveToNotChecked = (setupGuideSteps) =>
   setupGuideSteps.findIndex((step) => !step.dataset.isCompleted);
 
 // Function to update the progress bar based on completed steps
 const updateProgressBar = () => {
-  const completedStepsNo = setupGuideSteps.filter(
+  const checkedSteps = setupGuideSteps.filter(
     (step) => step.dataset.isCompleted
   ).length;
-  setupProgressBar.style.width = `${completedStepsNo * 20}%`;
-  progressCountElement.innerText = completedStepsNo;
+  setupGuideProgressIndicator.style.width = `${checkedSteps * 20}%`;
+  progressCountElement.innerText = checkedSteps;
 };
 
 // Event listeners
